@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDennis.MigrationsExtensions", "EDennis.MigrationsExtensions\EDennis.MigrationsExtensions.csproj", "{5EF8008D-D2EE-4787-8331-BAD16F68BA7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDennis.MigrationExtensions.ConsoleAppTest", "EDennis.MigrationExtensions.ConsoleAppTest\EDennis.MigrationExtensions.ConsoleAppTest.csproj", "{48482727-7999-486C-BDE7-89949C008A76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EF8008D-D2EE-4787-8331-BAD16F68BA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF8008D-D2EE-4787-8331-BAD16F68BA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF8008D-D2EE-4787-8331-BAD16F68BA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF8008D-D2EE-4787-8331-BAD16F68BA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48482727-7999-486C-BDE7-89949C008A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48482727-7999-486C-BDE7-89949C008A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48482727-7999-486C-BDE7-89949C008A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48482727-7999-486C-BDE7-89949C008A76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B55FDA26-E343-4953-A4AE-A91B2B65991F}
+	EndGlobalSection
+EndGlobal

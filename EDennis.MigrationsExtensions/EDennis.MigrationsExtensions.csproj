@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Version>0.1.2</Version>
+    <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
+    <PackageReleaseNotes>Fixed bug with __EFMigrationsHistory</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
+    <FileVersion>0.1.2.0</FileVersion>
+    <AssemblyVersion>0.1.2.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ResetSequences.sql" />
+    <None Remove="Temporal_AddHistoryTables.sql" />
+    <None Remove="Temporal_AddHistoryTables_Drop.sql" />
+    <None Remove="Temporal_CreateMaintenanceSchema.sql" />
+    <None Remove="Temporal_CreateMaintenanceSchema_Drop.sql" />
+    <None Remove="Temporal_DisableSystemTime.sql" />
+    <None Remove="Temporal_DisableSystemTime_Drop.sql" />
+    <None Remove="Temporal_EnableSystemTime.sql" />
+    <None Remove="Temporal_EnableSystemTime_Drop.sql" />
+    <None Remove="Temporal_GetMetadataFromExtProp.sql" />
+    <None Remove="Temporal_GetMetadataFromExtProp_Drop.sql" />
+    <None Remove="Temporal_GetMetadataFromInfoSchema.sql" />
+    <None Remove="Temporal_GetMetadataFromInfoSchema_Drop.sql" />
+    <None Remove="Temporal_UpdateExtendedProperties.sql" />
+    <None Remove="Temporal_UpdateExtendedProperties_Drop.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Temporal_AddHistoryTables.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ResetSequences.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Temporal_AddHistoryTables_Drop.sql" />
+    <EmbeddedResource Include="Temporal_CreateMaintenanceSchema.sql" />
+    <EmbeddedResource Include="Temporal_CreateMaintenanceSchema_Drop.sql" />
+    <EmbeddedResource Include="Temporal_DisableSystemTime.sql" />
+    <EmbeddedResource Include="Temporal_DisableSystemTime_Drop.sql" />
+    <EmbeddedResource Include="Temporal_EnableSystemTime.sql" />
+    <EmbeddedResource Include="Temporal_EnableSystemTime_Drop.sql" />
+    <EmbeddedResource Include="Temporal_GetMetadataFromExtProp.sql" />
+    <EmbeddedResource Include="Temporal_GetMetadataFromExtProp_Drop.sql" />
+    <EmbeddedResource Include="Temporal_GetMetadataFromInfoSchema.sql" />
+    <EmbeddedResource Include="Temporal_GetMetadataFromInfoSchema_Drop.sql" />
+    <EmbeddedResource Include="Temporal_UpdateExtendedProperties.sql" />
+    <EmbeddedResource Include="Temporal_UpdateExtendedProperties_Drop.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+  </ItemGroup>
+
+</Project>
