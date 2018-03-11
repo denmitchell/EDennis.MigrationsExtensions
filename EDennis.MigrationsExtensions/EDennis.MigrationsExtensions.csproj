@@ -2,17 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Version>0.1.2</Version>
+    <Version>1.0.0</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Fixed bug with __EFMigrationsHistory</PackageReleaseNotes>
+    <PackageReleaseNotes>Added DoInserts() extension method for MigrationBuilder.  This method disables temporal tables, performs inserts, re-enables temporal tables and resets all sequences.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>0.1.2.0</FileVersion>
-    <AssemblyVersion>0.1.2.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="ResetSequences.sql" />
+    <None Remove="ResetSequences_Drop.sql" />
     <None Remove="Temporal_AddHistoryTables.sql" />
     <None Remove="Temporal_AddHistoryTables_Drop.sql" />
     <None Remove="Temporal_CreateMaintenanceSchema.sql" />
@@ -37,6 +38,7 @@
     <EmbeddedResource Include="ResetSequences.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="ResetSequences_Drop.sql" />
     <EmbeddedResource Include="Temporal_AddHistoryTables_Drop.sql" />
     <EmbeddedResource Include="Temporal_CreateMaintenanceSchema.sql" />
     <EmbeddedResource Include="Temporal_CreateMaintenanceSchema_Drop.sql" />
