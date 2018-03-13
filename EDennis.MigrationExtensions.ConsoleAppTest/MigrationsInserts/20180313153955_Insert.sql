@@ -6,4 +6,4 @@
 insert into Address (PersonId,AddressId,Street,SysUserId,SysStart)
 	values
 		(1,1,'123 Main Street',0,'2016-03-03'),
-		(2,2,'321 Second Avenue',0,'2016-04-04');
+		(2,2,'321 Second Avenue;',0,'2016-04-04');

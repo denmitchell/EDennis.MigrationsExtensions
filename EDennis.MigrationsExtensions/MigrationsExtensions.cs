@@ -82,10 +82,9 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql("exec _maintenance.Temporal_UpdateExtendedProperties;");
             migrationBuilder.Sql("exec _maintenance.Temporal_DisableSystemTime;");
 
-            //load INSERT file, split into individual statements, and add to migrationBuilder
-            string[] statements = File.ReadAllText(sqlFilePath).Split(";");
-            foreach (string statement in statements)
-                migrationBuilder.Sql(statement + ";");
+            //load INSERT file and add to migrationBuilder
+            string statements = File.ReadAllText(sqlFilePath);
+            migrationBuilder.Sql(statements);
 
             migrationBuilder.Sql("exec _maintenance.Temporal_EnableSystemTime;");
             migrationBuilder.Sql("exec _maintenance.ResetSequences;");

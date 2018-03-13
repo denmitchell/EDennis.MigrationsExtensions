@@ -10,7 +10,6 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateMaintenanceProcedures();
-
             migrationBuilder.CreateSequence<int>(
                 name: "seqAddress");
 
@@ -55,9 +54,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.DoInserts("MigrationsInserts\\20180311204507_Insert.sql");
-
+            migrationBuilder.DoInserts("MigrationsInserts\\20180313153955_Insert.sql");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
