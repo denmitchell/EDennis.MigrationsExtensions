@@ -41,10 +41,9 @@ BEGIN
 		'select @NextValue = max([' + c.column_name + ']) + 1 from [' + c.table_schema + '].[' + c.table_name + ']' NextValueSql
 		from INFORMATION_SCHEMA.COLUMNS c
 		inner join INFORMATION_SCHEMA.SEQUENCES s
-			on replace(replace(replace(c.COLUMN_DEFAULT,'[',''),']',''),'dbo','')
+			on rtrim(replace(replace(replace(replace(replace(c.COLUMN_DEFAULT,'[',''),']',''),')',''),'(',''),'dbo',''))
 				LIKE '%' + 
 				case when s.sequence_schema <> 'dbo' then s.sequence_schema + '.' else '' end +  s.SEQUENCE_NAME 
-				+ '%' 
 	open c_seqtab
 	fetch next from c_seqtab into @SequenceSchema, @SequenceName, @TableSchema, @TableName, @ColumnName, @NextValueSql
 	while @@FETCH_STATUS = 0
