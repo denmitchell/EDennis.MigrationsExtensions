@@ -22,7 +22,7 @@ namespace EDennis.MigrationsExtensions {
         public static MigrationBuilder CreateMaintenanceProcedures(
             this MigrationBuilder migrationBuilder) {
 
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_CreateMaintenanceSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp.sql"));
@@ -33,6 +33,23 @@ namespace EDennis.MigrationsExtensions {
 
             return migrationBuilder;
         }
+
+
+        /// <summary>
+        /// Adds support for a TestJson table, including the table itself, as well
+        /// as a stored procedure for adding/updating (merging) records to the table.
+        /// </summary>
+        /// <param name="migrationBuilder">The MigrationBuilder to extend</param>
+        /// <returns>the MigrationBuilder (fluent API)</returns>
+        public static MigrationBuilder CreateTestJsonTableSupport(
+            this MigrationBuilder migrationBuilder) {
+
+            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("CreateTestJsonTable.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("SaveTestJson.sql"));
+            return migrationBuilder;
+        }
+
 
         /// <summary>
         /// Drops all stored procedures used to maintain temporal tables.  This
@@ -50,10 +67,27 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_CreateMaintenanceSchema_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema_Drop.sql"));
 
             return migrationBuilder;
         }
+
+
+        /// <summary>
+        /// Removes support for a TestJson table, including the table itself, as well
+        /// as a stored procedure for adding/updating (merging) records to the table.
+        /// </summary>
+        /// <param name="migrationBuilder">The MigrationBuilder to extend</param>
+        /// <returns>the MigrationBuilder (fluent API)</returns>
+        public static MigrationBuilder DropTestJsonTableSupport(
+            this MigrationBuilder migrationBuilder) {
+
+            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("CreateTestJsonTable_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("SaveTestJson_Drop.sql"));
+            return migrationBuilder;
+        }
+
 
         /// <summary>
         /// Adds history tables.  This method is called by the TemporalMigrationSqlGenerator

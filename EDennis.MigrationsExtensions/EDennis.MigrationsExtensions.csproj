@@ -2,22 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Fixed subtle bug with DoInserts</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for TestJson tables.  To add, include migrationBuilder.CreateTestJsonTableSupport().  To remove, include migrationBuilder.DropTestJsonTableSupport();</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>1.1.2.0</FileVersion>
-    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CreateMaintenanceSchema.sql" />
+    <None Remove="CreateMaintenanceSchema_Drop.sql" />
+    <None Remove="CreateTestJsonTable.sql" />
+    <None Remove="CreateTestJsonTable_Drop.sql" />
     <None Remove="ResetSequences.sql" />
     <None Remove="ResetSequences_Drop.sql" />
+    <None Remove="SaveTestJson.sql" />
+    <None Remove="SaveTestJson_Drop.sql" />
     <None Remove="Temporal_AddHistoryTables.sql" />
     <None Remove="Temporal_AddHistoryTables_Drop.sql" />
-    <None Remove="Temporal_CreateMaintenanceSchema.sql" />
-    <None Remove="Temporal_CreateMaintenanceSchema_Drop.sql" />
     <None Remove="Temporal_DisableSystemTime.sql" />
     <None Remove="Temporal_DisableSystemTime_Drop.sql" />
     <None Remove="Temporal_EnableSystemTime.sql" />
@@ -31,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
+    <EmbeddedResource Include="CreateTestJsonTable.sql" />
+    <EmbeddedResource Include="SaveTestJson.sql" />
     <EmbeddedResource Include="Temporal_AddHistoryTables.sql" />
   </ItemGroup>
 
@@ -39,9 +46,10 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="ResetSequences_Drop.sql" />
+    <EmbeddedResource Include="SaveTestJson_Drop.sql" />
     <EmbeddedResource Include="Temporal_AddHistoryTables_Drop.sql" />
-    <EmbeddedResource Include="Temporal_CreateMaintenanceSchema.sql" />
-    <EmbeddedResource Include="Temporal_CreateMaintenanceSchema_Drop.sql" />
+    <EmbeddedResource Include="CreateMaintenanceSchema.sql" />
+    <EmbeddedResource Include="CreateMaintenanceSchema_Drop.sql" />
     <EmbeddedResource Include="Temporal_DisableSystemTime.sql" />
     <EmbeddedResource Include="Temporal_DisableSystemTime_Drop.sql" />
     <EmbeddedResource Include="Temporal_EnableSystemTime.sql" />
