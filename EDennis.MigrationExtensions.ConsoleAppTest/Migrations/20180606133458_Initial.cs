@@ -1,7 +1,6 @@
-﻿using EDennis.MigrationsExtensions;
+﻿using System;
+using EDennis.MigrationsExtensions;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
@@ -10,6 +9,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateMaintenanceProcedures();
+            migrationBuilder.CreateTestJsonTableSupport();
             migrationBuilder.CreateSequence<int>(
                 name: "seqAddress");
 
@@ -21,12 +21,12 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
-                    DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     FirstName = table.Column<string>(maxLength: 20, nullable: true),
-                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))"),
-                    SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
+                    DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
+                    Weight = table.Column<decimal>(type: "decimal(10,3)", nullable: false),
                     SysUserId = table.Column<int>(nullable: false, defaultValueSql: "((0))"),
-                    Weight = table.Column<decimal>(type: "decimal(10,3)", nullable: false)
+                    SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
+                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
                 },
                 constraints: table =>
                 {
@@ -40,9 +40,9 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                     PersonId = table.Column<int>(nullable: false),
                     AddressId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
                     Street = table.Column<string>(maxLength: 90, nullable: true),
-                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))"),
+                    SysUserId = table.Column<int>(nullable: false, defaultValueSql: "((0))"),
                     SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
-                    SysUserId = table.Column<int>(nullable: false, defaultValueSql: "((0))")
+                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
                 });
-            migrationBuilder.DoInserts("MigrationsInserts\\20180313153955_Insert.sql");
+            migrationBuilder.DoInserts("MigrationsInserts\\Initial_Insert.sql");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -71,6 +71,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
             migrationBuilder.DropSequence(
                 name: "seqPerson");
 
+            migrationBuilder.DropTestJsonTableSupport();
             migrationBuilder.DropMaintenanceProcedures();
         }
     }
