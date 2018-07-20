@@ -21,7 +21,7 @@ GO
 --				couldn't totally solve except
 --				by updating this procedure.
 -- =============================================
-ALTER PROCEDURE [_maintenance].[SaveTestJson] 
+CREATE PROCEDURE [_maintenance].[SaveTestJson] 
 	@Project varchar(100), @Class varchar(100), @Method varchar(100), 
 	@FileName varchar(100), @Json varchar(max)
 AS
