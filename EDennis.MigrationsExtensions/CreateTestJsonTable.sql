@@ -9,11 +9,14 @@ GO
 -- Description:	Creates a TestJson table
 -- =============================================
 CREATE TABLE _maintenance.TestJson(
-       Project varchar(100),
-       Class varchar(100),
-       Method varchar(100),
-       FileName varchar(100),
+       ProjectName varchar(100),
+       ClassName varchar(100),
+       MethodName varchar(100),
+       TestScenario varchar(100),
+       TestCase varchar(100),
+       TestFile varchar(100),
        Json varchar(max),
        constraint pk_maintenanceTestJson 
-              primary key (Project, Class, Method, FileName)
+              primary key (ProjectName, ClassName, MethodName,
+			  TestScenario, TestCase, TestFile)
 );
