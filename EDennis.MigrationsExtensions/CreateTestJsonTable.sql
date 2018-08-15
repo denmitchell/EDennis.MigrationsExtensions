@@ -1,5 +1,4 @@
-﻿/****** Object:  StoredProcedure [_maintenance].[SaveTestJson]    Script Date: 6/4/2018 12:15:49 PM ******/
-SET ANSI_NULLS ON
+﻿SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -16,7 +15,11 @@ CREATE TABLE _maintenance.TestJson(
        TestCase varchar(100),
        TestFile varchar(100),
        Json varchar(max),
+	   SysStart datetime2 GENERATED ALWAYS AS ROW START NOT NULL default (getdate()),
+	   SysEnd datetime2 GENERATED ALWAYS AS ROW END NOT NULL default (CONVERT([datetime2],'9999-12-31 23:59:59.9999999')),
        constraint pk_maintenanceTestJson 
               primary key (ProjectName, ClassName, MethodName,
-			  TestScenario, TestCase, TestFile)
-);
+			  TestScenario, TestCase, TestFile),
+	   period for system_time (SysStart, SysEnd)
+) with (system_versioning = on (history_table = _maintenance.TestJsonHistory));
+

@@ -54,6 +54,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
                 });
+
             migrationBuilder.DoInserts("MigrationsInserts\\Initial_Insert.sql");
         }
 

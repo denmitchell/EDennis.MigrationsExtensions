@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Updated CreateTestJsonTable and SaveTestJson to use a more expanded model for the TestJson table.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed bug with SaveTestJson stored procedure.  Made TestJson a system-versioned (temporal) table.  Added TruncateTestJson to remove all data from TestJson and TestJsonHistory</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>1.4.0.0</FileVersion>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,11 +32,15 @@
     <None Remove="Temporal_GetMetadataFromInfoSchema_Drop.sql" />
     <None Remove="Temporal_UpdateExtendedProperties.sql" />
     <None Remove="Temporal_UpdateExtendedProperties_Drop.sql" />
+    <None Remove="TruncateTestJson.sql" />
+    <None Remove="TruncateTestJson_Drop.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
     <EmbeddedResource Include="CreateTestJsonTable.sql" />
+    <EmbeddedResource Include="TruncateTestJson_Drop.sql" />
+    <EmbeddedResource Include="TruncateTestJson.sql" />
     <EmbeddedResource Include="SaveTestJson.sql" />
     <EmbeddedResource Include="Temporal_AddHistoryTables.sql" />
   </ItemGroup>
