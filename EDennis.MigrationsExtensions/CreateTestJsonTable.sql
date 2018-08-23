@@ -14,7 +14,7 @@ CREATE TABLE _maintenance.TestJson(
        TestScenario varchar(100),
        TestCase varchar(100),
        TestFile varchar(100),
-       Json varchar(max),
+       Json nvarchar(max),
 	   SysStart datetime2 GENERATED ALWAYS AS ROW START NOT NULL default (getdate()),
 	   SysEnd datetime2 GENERATED ALWAYS AS ROW END NOT NULL default (CONVERT([datetime2],'9999-12-31 23:59:59.9999999')),
        constraint pk_maintenanceTestJson 

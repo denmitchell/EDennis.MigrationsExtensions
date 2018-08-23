@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
     [DbContext(typeof(PersonAddressContext))]
-    [Migration("20180815134211_Initial")]
+    [Migration("20180823124518_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

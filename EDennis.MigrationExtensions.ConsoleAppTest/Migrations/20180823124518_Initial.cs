@@ -2,12 +2,9 @@
 using EDennis.MigrationsExtensions;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
-{
-    public partial class Initial : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations {
+    public partial class Initial : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateMaintenanceProcedures();
             migrationBuilder.CreateTestJsonTableSupport();
             migrationBuilder.CreateSequence<int>(
@@ -18,8 +15,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Person",
-                columns: table => new
-                {
+                columns: table => new {
                     PersonId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
                     FirstName = table.Column<string>(maxLength: 20, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
@@ -28,15 +24,13 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                     SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
                     SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Person", x => x.PersonId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Address",
-                columns: table => new
-                {
+                columns: table => new {
                     PersonId = table.Column<int>(nullable: false),
                     AddressId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
                     Street = table.Column<string>(maxLength: 90, nullable: true),
@@ -44,8 +38,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                     SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
                     SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Address", x => new { x.PersonId, x.AddressId });
                     table.ForeignKey(
                         name: "FK_Address_Person",
@@ -58,8 +51,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
             migrationBuilder.DoInserts("MigrationsInserts\\Initial_Insert.sql");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "Address");
 
