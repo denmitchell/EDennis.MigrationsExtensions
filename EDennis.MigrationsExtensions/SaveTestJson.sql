@@ -25,7 +25,7 @@ GO
 CREATE PROCEDURE [_maintenance].[SaveTestJson] 
 	@ProjectName varchar(100), @ClassName varchar(100), @MethodName varchar(100), 
 	@TestScenario varchar(100), @TestCase varchar(100), @TestFile varchar(100), 
-	@Json varchar(max)
+	@Json nvarchar(max)
 AS
 BEGIN
 

@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.5.1</Version>
+    <Version>1.5.2</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Updated Json column in TestJson to support unicode characters.</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated Json parameter in SaveTestJson to support unicode characters.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>1.5.1.0</FileVersion>
-    <AssemblyVersion>1.5.1.0</AssemblyVersion>
+    <FileVersion>1.5.2.0</FileVersion>
+    <AssemblyVersion>1.5.2.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
