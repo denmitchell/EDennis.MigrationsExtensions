@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.7.0</Version>
+    <Version>1.7.1</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Added function to generate base history table SQL to provide better compatibility with tables having Identity specifications.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for resetting identity columns to the maximum value of the underlying column</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>1.7.0.0</FileVersion>
-    <AssemblyVersion>1.7.0.0</AssemblyVersion>
+    <FileVersion>1.7.1.0</FileVersion>
+    <AssemblyVersion>1.7.1.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +16,8 @@
     <None Remove="CreateMaintenanceSchema_Drop.sql" />
     <None Remove="CreateTestJsonTable.sql" />
     <None Remove="CreateTestJsonTable_Drop.sql" />
+    <None Remove="ResetIdentities.sql" />
+    <None Remove="ResetIdentities_Drop.sql" />
     <None Remove="ResetSequences.sql" />
     <None Remove="ResetSequences_Drop.sql" />
     <None Remove="SaveTestJson.sql" />
@@ -39,6 +41,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="ResetIdentities.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResetIdentities_Drop.sql" />
     <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition.sql" />
     <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
     <EmbeddedResource Include="CreateTestJsonTable.sql" />

@@ -30,6 +30,7 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("ResetIdentities.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("ResetSequences.sql"));
 
             return migrationBuilder;
@@ -63,6 +64,7 @@ namespace EDennis.MigrationsExtensions {
             this MigrationBuilder migrationBuilder) {
 
             migrationBuilder.Sql(GetEmbeddedResource("ResetSequences_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("ResetIdentities_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime_Drop.sql"));
