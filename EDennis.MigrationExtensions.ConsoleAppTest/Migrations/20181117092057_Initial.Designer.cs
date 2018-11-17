@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
     [DbContext(typeof(PersonAddressContext))]
-    [Migration("20180823124518_Initial")]
+    [Migration("20181117092057_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("Relational:Sequence:.seqAddress", "'seqAddress', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("Relational:Sequence:.seqPerson", "'seqPerson', '', '1', '1', '', '', 'Int32', 'False'")

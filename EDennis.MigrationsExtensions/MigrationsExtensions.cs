@@ -23,6 +23,7 @@ namespace EDennis.MigrationsExtensions {
             this MigrationBuilder migrationBuilder) {
 
             migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp.sql"));
@@ -68,6 +69,7 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema_Drop.sql"));
 
             return migrationBuilder;

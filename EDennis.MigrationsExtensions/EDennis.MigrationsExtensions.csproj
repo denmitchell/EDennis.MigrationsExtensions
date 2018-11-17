@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.6.0</Version>
+    <Version>1.7.0</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Upgraded to Microsoft.EntityFrameworkCore.SqlServer Version 2.1.4</PackageReleaseNotes>
+    <PackageReleaseNotes>Added function to generate base history table SQL to provide better compatibility with tables having Identity specifications.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>1.6.0.0</FileVersion>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.7.0.0</FileVersion>
+    <AssemblyVersion>1.7.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +26,8 @@
     <None Remove="Temporal_DisableSystemTime_Drop.sql" />
     <None Remove="Temporal_EnableSystemTime.sql" />
     <None Remove="Temporal_EnableSystemTime_Drop.sql" />
+    <None Remove="Temporal_GetBaseHistoryTableDefinition.sql" />
+    <None Remove="Temporal_GetBaseHistoryTableDefinition_Drop.sql" />
     <None Remove="Temporal_GetMetadataFromExtProp.sql" />
     <None Remove="Temporal_GetMetadataFromExtProp_Drop.sql" />
     <None Remove="Temporal_GetMetadataFromInfoSchema.sql" />
@@ -37,8 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition.sql" />
     <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
     <EmbeddedResource Include="CreateTestJsonTable.sql" />
+    <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition_Drop.sql" />
     <EmbeddedResource Include="TruncateTestJson_Drop.sql" />
     <EmbeddedResource Include="TruncateTestJson.sql" />
     <EmbeddedResource Include="SaveTestJson.sql" />

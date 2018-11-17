@@ -23,6 +23,8 @@ BEGIN
        declare @sql varchar(max)
        declare @val varchar(255), @name varchar(255)
  
+		declare @identityColumn varchar(max)
+		declare @identityColumnType varchar(max)
  
        --
        -- GET TEMPORAL METADATA FROM INFORMATION_SCHEMA AND EXTENDED PROPERTIES
@@ -234,8 +236,14 @@ BEGIN
                                   --
                                          begin try
                                                 if not exists (select 1 from sys.schemas where name = @HistoryTableSchema)
-                                                       exec ('create schema [' +  @HistoryTableSchema +']')
-                                                exec ('select * into [' + @HistoryTableSchema +'].[' + @HistoryTableName + '] from [' + @TemporalTableSchema +'].[' + @TemporalTableName + '] where 0 = 1')
+													begin
+														exec ('create schema [' + @HistoryTableSchema + '];');
+													end
+													declare @tblsql varchar(max) = 
+														_maintenance.Temporal_GetBaseHistoryTableDefinition(
+															@TemporalTableSchema, @TemporalTableName, 
+															@HistoryTableSchema, @HistoryTableName)
+													exec (@tblsql)
                                          end try
                                          begin catch
                                                 set @ErrorMessage = ERROR_MESSAGE()
@@ -243,10 +251,10 @@ BEGIN
                                                        N'A NOTE: Cannot Use %s.%s as history table for %s.%s.  %s',
                                                        11, --Fatal
                                                        1, --State
-                                                       @TemporalTableSchema,
-                                                       @TemporalTableName,
                                                        @HistoryTableSchema,
                                                        @HistoryTableName,
+                                                       @TemporalTableSchema,
+                                                       @TemporalTableName,
                                                        @ErrorMessage
                                                 );
                                          end catch

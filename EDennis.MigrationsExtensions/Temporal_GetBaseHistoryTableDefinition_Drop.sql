@@ -1,0 +1,1 @@
+﻿drop function _maintenance.GetBareBonesTableDefinition;
