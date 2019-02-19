@@ -10,6 +10,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         {
             migrationBuilder.CreateMaintenanceProcedures();
             migrationBuilder.CreateTestJsonTableSupport();
+
             migrationBuilder.CreateSequence<int>(
                 name: "seqAddress");
 
@@ -54,7 +55,9 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
                 });
+
             migrationBuilder.DoInserts("MigrationsInserts\\Initial_Insert.sql");
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -73,6 +76,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.DropMaintenanceProcedures();
             migrationBuilder.DropTestJsonTableSupport();
+
         }
     }
 }

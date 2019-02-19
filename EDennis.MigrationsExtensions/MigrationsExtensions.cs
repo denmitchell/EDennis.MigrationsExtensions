@@ -49,6 +49,7 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("CreateTestJsonTable.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("SaveTestJson.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("GetTestJson.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("TruncateTestJson.sql"));
             return migrationBuilder;
         }
@@ -90,6 +91,7 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("CreateTestJsonTable_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("SaveTestJson_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("GetTestJson_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("TruncateTestJson_Drop.sql"));
             return migrationBuilder;
         }
