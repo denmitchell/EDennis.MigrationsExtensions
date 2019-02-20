@@ -129,6 +129,7 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(statements);
 
             migrationBuilder.Sql("exec _maintenance.Temporal_EnableSystemTime;");
+            migrationBuilder.Sql("exec _maintenance.ResetIdentities;");
             migrationBuilder.Sql("exec _maintenance.ResetSequences;");
 
             return migrationBuilder;

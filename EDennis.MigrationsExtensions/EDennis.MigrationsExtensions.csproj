@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>1.9.0</Version>
+    <Version>1.9.1</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Added GetTestJson stored procedure</PackageReleaseNotes>
+    <PackageReleaseNotes>Added ResetIdentities call to DoInserts extension method</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>1.9.0.0</FileVersion>
-    <AssemblyVersion>1.9.0.0</AssemblyVersion>
+    <FileVersion>1.9.1.0</FileVersion>
+    <AssemblyVersion>1.9.1.0</AssemblyVersion>
     <Copyright>Dennis Mitchell, 2018</Copyright>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
