@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CodeFirstPractice;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using System;
 
 namespace EDennis.MigrationsExtensions.ConsoleAppTest
 {
@@ -6,7 +10,9 @@ namespace EDennis.MigrationsExtensions.ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (var context = new PersonAddressContext()) {
+                context.Database.Migrate();
+            }
         }
     }
 }

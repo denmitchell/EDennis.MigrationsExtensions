@@ -56,6 +56,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.SaveMappings();
             migrationBuilder.DoInserts("MigrationsInserts\\Initial_Insert.sql");
 
         }

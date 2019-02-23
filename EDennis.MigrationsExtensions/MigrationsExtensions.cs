@@ -14,6 +14,18 @@ namespace EDennis.MigrationsExtensions {
     public static class MigrationsExtensions {
 
         /// <summary>
+        /// Saves class-table/property-column mappings to extended properties in SQL Server.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
+        /// <returns></returns>
+        public static MigrationBuilder SaveMappings(this MigrationBuilder migrationBuilder) {
+            migrationBuilder.Operations.Add(
+                new SaveMappingsOperation());
+            return migrationBuilder;
+        }
+
+
+        /// <summary>
         /// Creates all stored procedures used to maintain temporal tables.  This
         /// method should be called by the intital migration's Up() method
         /// </summary>

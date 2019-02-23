@@ -16,4 +16,10 @@
     <ProjectReference Include="..\EDennis.MigrationsExtensions\EDennis.MigrationsExtensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="MigrationsInserts\Initial_Insert.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

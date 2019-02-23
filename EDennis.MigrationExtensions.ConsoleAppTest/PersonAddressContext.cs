@@ -14,7 +14,7 @@ namespace CodeFirstPractice {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=PersonAddress01;Integrated Security=SSPI;")
-                .ReplaceService<IMigrationsSqlGenerator, TemporalMigrationsSqlGenerator>();
+                .ReplaceService<IMigrationsSqlGenerator, MappingMigrationsSqlGenerator>();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
