@@ -22,7 +22,6 @@ namespace EDennis.MigrationsExtensions {
 
             if (operation is SaveMappingsOperation) {
 
-
                 var entityTypes = model.GetEntityTypes();
 
                 foreach (var entityType in entityTypes) {
