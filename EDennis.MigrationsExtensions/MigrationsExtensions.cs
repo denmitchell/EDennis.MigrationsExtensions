@@ -27,15 +27,45 @@ namespace EDennis.MigrationsExtensions {
 
 
         /// <summary>
-        /// Creates SQL Server temporal tables
+        /// Creates SQL Server temporal tables and supporting maintenance objects
         /// </summary>
         /// <param name="migrationBuilder"></param>
         /// <returns></returns>
         public static MigrationBuilder CreateSqlServerTemporalTables(this MigrationBuilder migrationBuilder) {
+
+            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime.sql"));
+
             migrationBuilder.Operations.Add(
                 new CreateSqlServerTemporalTablesOperation());
             return migrationBuilder;
         }
+
+
+        /// <summary>
+        /// Creates SQL Server temporal tables and supporting maintenance objects
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
+        /// <returns></returns>
+        public static MigrationBuilder DropSqlServerTemporalTables(this MigrationBuilder migrationBuilder) {
+
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition_Drop.sql"));
+
+            return migrationBuilder;
+        }
+
 
         /// <summary>
         /// Creates all stored procedures used to maintain temporal tables.  This
@@ -44,7 +74,7 @@ namespace EDennis.MigrationsExtensions {
         /// <param name="migrationBuilder">The MigrationBuilder to extend</param>
         /// <returns>the MigrationBuilder (fluent API)</returns>
         public static MigrationBuilder CreateMaintenanceProcedures(
-            this MigrationBuilder migrationBuilder, bool sqlTemporalSupport = false,
+            this MigrationBuilder migrationBuilder,
             params Procedure[] specificProceduresToInclude) {
 
             migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
@@ -62,17 +92,6 @@ namespace EDennis.MigrationsExtensions {
                     migrationBuilder.Sql(GetEmbeddedResource(procedure.ToString() + "_Drop.sql"));
                 }
             }
-
-            if (sqlTemporalSupport) {
-                migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime.sql"));
-            }
-
 
             return migrationBuilder;
         }
@@ -111,14 +130,6 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(GetEmbeddedResource("MaxDateTime2_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("RightBefore_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("RightAfter_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema_Drop.sql"));
 
             return migrationBuilder;
         }

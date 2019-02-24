@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDennis.MigrationsExtensions", "EDennis.MigrationsExtensions\EDennis.MigrationsExtensions.csproj", "{5EF8008D-D2EE-4787-8331-BAD16F68BA7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EDennis.MigrationsExtensions", "EDennis.MigrationsExtensions\EDennis.MigrationsExtensions.csproj", "{5EF8008D-D2EE-4787-8331-BAD16F68BA7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDennis.MigrationExtensions.ConsoleAppTest", "EDennis.MigrationExtensions.ConsoleAppTest\EDennis.MigrationExtensions.ConsoleAppTest.csproj", "{48482727-7999-486C-BDE7-89949C008A76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EDennis.MigrationExtensions.ConsoleAppTest", "EDennis.MigrationExtensions.ConsoleAppTest\EDennis.MigrationExtensions.ConsoleAppTest.csproj", "{48482727-7999-486C-BDE7-89949C008A76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B250C05-1690-4453-A551-ACB35FFD725D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
