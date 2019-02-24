@@ -10,7 +10,7 @@ GO
 --              omits other constraints and 
 --              identity specification
 -- =============================================
-CREATE FUNCTION _maintenance.Temporal_GetBaseHistoryTableDefinition 
+CREATE FUNCTION _.Temporal_GetBaseHistoryTableDefinition 
 (
 	@TemporalSchemaName varchar(255) = 'dbo',
 	@TemporalTableName varchar(255),

@@ -1,4 +1,4 @@
-/****** Object:  StoredProcedure [_maintenance].[Temporal_UpdateExtendedProperties]    Script Date: 2/25/2018 4:34:06 PM ******/
+/****** Object:  StoredProcedure [_].[Temporal_UpdateExtendedProperties]    Script Date: 2/25/2018 4:34:06 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +10,7 @@ GO
 -- Create date: 2018-02-24
 -- Description: Updates Extended Properties for all temporal tables and columns 
 -- ===========================================================================
-CREATE PROCEDURE [_maintenance].[Temporal_UpdateExtendedProperties]
+CREATE PROCEDURE [_].[Temporal_UpdateExtendedProperties]
 AS
 BEGIN
 
@@ -33,7 +33,7 @@ declare @val varchar(255), @name varchar(255)
             SysStartColumnName varchar(255),
             SysEndColumnName varchar(255)
     );
-    insert into @tt exec _maintenance.Temporal_GetMetadataFromInfoSchema
+    insert into @tt exec _.Temporal_GetMetadataFromInfoSchema
 
 
 --

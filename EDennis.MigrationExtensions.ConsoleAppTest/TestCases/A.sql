@@ -10,8 +10,8 @@ declare @Expected varchar(max)  = (
 	select * from Person
 	for json path
 )
-exec _maintenance.ResetSequences
-exec _maintenance.SaveTestJson 'EDennis.MigrationsExtensions', 'StoredProcedure', 'GetTestJson','GetTestJson','A','Input', @Input
-exec _maintenance.SaveTestJson 'EDennis.MigrationsExtensions', 'StoredProcedure', 'GetTestJson','GetTestJson','A','Expected', @Expected
+exec _.ResetSequences
+exec _.SaveTestJson 'EDennis.MigrationsExtensions', 'StoredProcedure', 'GetTestJson','GetTestJson','A','Input', @Input
+exec _.SaveTestJson 'EDennis.MigrationsExtensions', 'StoredProcedure', 'GetTestJson','GetTestJson','A','Expected', @Expected
 
-exec _maintenance.GetTestJson 'EDennis.MigrationsExtensions', 'StoredProcedure', 'GetTestJson','GetTestJson','A'
+exec _.GetTestJson 'EDennis.MigrationsExtensions', 'StoredProcedure', 'GetTestJson','GetTestJson','A'

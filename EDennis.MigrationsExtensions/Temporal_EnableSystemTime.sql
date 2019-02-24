@@ -1,4 +1,4 @@
-/****** Object:  StoredProcedure [_maintenance].[Temporal_EnableSystemTime]    Script Date: 2/25/2018 4:32:55 PM ******/
+/****** Object:  StoredProcedure [_].[Temporal_EnableSystemTime]    Script Date: 2/25/2018 4:32:55 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ GO
 --              database.  Note: this relies upon the presence of 
 --              extended properties with the name 'SystemTimeComponent'
 -- ===========================================================================
-CREATE PROCEDURE [_maintenance].[Temporal_EnableSystemTime] 
+CREATE PROCEDURE [_].[Temporal_EnableSystemTime] 
 AS
 BEGIN
 
@@ -49,8 +49,8 @@ BEGIN
               SysStartColumnName varchar(255),
               SysEndColumnName varchar(255)
        );
-	   insert into @tt1 exec _maintenance.Temporal_GetMetadataFromExtProp
-	   insert into @tt2 exec _maintenance.Temporal_GetMetadataFromInfoSchema
+	   insert into @tt1 exec _.Temporal_GetMetadataFromExtProp
+	   insert into @tt2 exec _.Temporal_GetMetadataFromInfoSchema
 
 	   insert into @tt select * from @tt1 except select * from @tt2
 

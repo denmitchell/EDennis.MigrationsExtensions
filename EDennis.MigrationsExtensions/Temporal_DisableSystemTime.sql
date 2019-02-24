@@ -1,4 +1,4 @@
-/****** Object:  StoredProcedure [_maintenance].[Temporal_DisableSystemTime]    Script Date: 2/25/2018 4:32:00 PM ******/
+/****** Object:  StoredProcedure [_].[Temporal_DisableSystemTime]    Script Date: 2/25/2018 4:32:00 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,7 @@ GO
 --				Temporal_UpdateExtendedProperties to preserve temporal 
 --              metadata as extended properties of tables and columns
 -- ===========================================================================
-CREATE PROCEDURE [_maintenance].[Temporal_DisableSystemTime]
+CREATE PROCEDURE [_].[Temporal_DisableSystemTime]
 AS
 BEGIN
 
@@ -26,7 +26,7 @@ BEGIN
             SysEndColumnName varchar(255)
     );
 	
-	insert into @tt exec _maintenance.Temporal_GetMetadataFromInfoSchema
+	insert into @tt exec _.Temporal_GetMetadataFromInfoSchema
 		
 
 	declare @TemporalTableSchema varchar(255), @TemporalTableName varchar(255)

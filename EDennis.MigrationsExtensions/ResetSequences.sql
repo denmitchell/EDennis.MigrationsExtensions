@@ -12,7 +12,7 @@ GO
 --              Note that the sequence will only be reset when one or more
 --              columns specify the sequence as a default.
 -- ===========================================================================
-CREATE PROCEDURE _maintenance.ResetSequences
+CREATE PROCEDURE _.ResetSequences
 AS
 BEGIN
 

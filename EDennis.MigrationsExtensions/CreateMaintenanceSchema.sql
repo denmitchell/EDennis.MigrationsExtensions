@@ -1,4 +1,4 @@
-if not exists (select name from sys.schemas where name = '_maintenance')
+if not exists (select name from sys.schemas where name = '_')
 begin
-	exec('create schema _maintenance');
+	exec('create schema _');
 end

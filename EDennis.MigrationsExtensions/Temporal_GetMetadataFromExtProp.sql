@@ -1,4 +1,4 @@
-/****** Object:  StoredProcedure [_maintenance].[Temporal_GetMetadataFromExtProp]    Script Date: 2/25/2018 4:33:16 PM ******/
+/****** Object:  StoredProcedure [_].[Temporal_GetMetadataFromExtProp]    Script Date: 2/25/2018 4:33:16 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +10,7 @@ GO
 -- Create date: 2018-02-24
 -- Description: Gets temporal metadata from extended properties
 -- ===========================================================================
-CREATE PROCEDURE [_maintenance].[Temporal_GetMetadataFromExtProp]
+CREATE PROCEDURE [_].[Temporal_GetMetadataFromExtProp]
 AS
 BEGIN
 

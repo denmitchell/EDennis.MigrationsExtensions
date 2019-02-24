@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using EDennis.MigrationsExtensions;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -57,7 +58,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 });
 
             migrationBuilder.SaveMappings();
-            migrationBuilder.DoInserts("MigrationsInserts\\Initial_Insert.sql");
+            migrationBuilder.Sql(File.ReadAllText("MigrationsInserts\\Initial_Insert.sql"));
 
         }
 

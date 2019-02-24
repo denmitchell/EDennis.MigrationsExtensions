@@ -1,1 +1,2 @@
-﻿drop procedure _maintenance.Temporal_EnableSystemTime;
+﻿if exists (select 0 from sysobjects where id = object_id(N'_.Temporal_EnableSystemTime'))
+	drop procedure _.Temporal_EnableSystemTime;

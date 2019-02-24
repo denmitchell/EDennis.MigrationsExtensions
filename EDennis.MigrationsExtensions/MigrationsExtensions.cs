@@ -25,6 +25,18 @@ namespace EDennis.MigrationsExtensions {
         }
 
 
+
+        /// <summary>
+        /// Creates SQL Server temporal tables
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
+        /// <returns></returns>
+        public static MigrationBuilder CreateSqlServerTemporalTables(this MigrationBuilder migrationBuilder) {
+            migrationBuilder.Operations.Add(
+                new CreateSqlServerTemporalTablesOperation());
+            return migrationBuilder;
+        }
+
         /// <summary>
         /// Creates all stored procedures used to maintain temporal tables.  This
         /// method should be called by the intital migration's Up() method
@@ -32,18 +44,35 @@ namespace EDennis.MigrationsExtensions {
         /// <param name="migrationBuilder">The MigrationBuilder to extend</param>
         /// <returns>the MigrationBuilder (fluent API)</returns>
         public static MigrationBuilder CreateMaintenanceProcedures(
-            this MigrationBuilder migrationBuilder) {
+            this MigrationBuilder migrationBuilder, bool sqlTemporalSupport = false,
+            params Procedure[] specificProceduresToInclude) {
 
             migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("ResetIdentities.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("ResetSequences.sql"));
+
+            if (specificProceduresToInclude.Length == 0) {
+                migrationBuilder.Sql(GetEmbeddedResource("ResetIdentities.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("ResetSequences.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("GetMappings.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("MaxDateTime2.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("RightBefore.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("RightAfter.sql"));
+            } else {
+                foreach (var procedure in specificProceduresToInclude) {
+                    migrationBuilder.Sql(GetEmbeddedResource(procedure.ToString() + ".sql"));
+                    migrationBuilder.Sql(GetEmbeddedResource(procedure.ToString() + "_Drop.sql"));
+                }
+            }
+
+            if (sqlTemporalSupport) {
+                migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime.sql"));
+            }
+
 
             return migrationBuilder;
         }
@@ -78,6 +107,10 @@ namespace EDennis.MigrationsExtensions {
 
             migrationBuilder.Sql(GetEmbeddedResource("ResetSequences_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("ResetIdentities_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("GetMappings_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("MaxDateTime2_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("RightBefore_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("RightAfter_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime_Drop.sql"));
@@ -117,8 +150,8 @@ namespace EDennis.MigrationsExtensions {
         public static MigrationBuilder AddHistoryTables(
             this MigrationBuilder migrationBuilder) {
 
-            migrationBuilder.Sql("exec _maintenance.Temporal_AddHistoryTables;");
-            migrationBuilder.Sql("exec _maintenance.Temporal_UpdateExtendedProperties;");
+            migrationBuilder.Sql("exec _.Temporal_AddHistoryTables;");
+            migrationBuilder.Sql("exec _.Temporal_UpdateExtendedProperties;");
 
             return migrationBuilder;
         }
@@ -130,19 +163,19 @@ namespace EDennis.MigrationsExtensions {
         /// <param name="migrationBuilder">The MigrationBuilder to extend</param>
         /// <param name="sqlFilePath">File containing INSERT statements, each terminated by ";"</param>
         /// <returns>the MigrationBuilder (fluent API)</returns>
-        public static MigrationBuilder DoInserts(
+        public static MigrationBuilder DoTemporalInserts(
             this MigrationBuilder migrationBuilder, string sqlFilePath) {
 
-            migrationBuilder.Sql("exec _maintenance.Temporal_UpdateExtendedProperties;");
-            migrationBuilder.Sql("exec _maintenance.Temporal_DisableSystemTime;");
+            migrationBuilder.Sql("exec _.Temporal_UpdateExtendedProperties;");
+            migrationBuilder.Sql("exec _.Temporal_DisableSystemTime;");
 
             //load INSERT file and add to migrationBuilder
             string statements = File.ReadAllText(sqlFilePath);
             migrationBuilder.Sql(statements);
 
-            migrationBuilder.Sql("exec _maintenance.Temporal_EnableSystemTime;");
-            migrationBuilder.Sql("exec _maintenance.ResetIdentities;");
-            migrationBuilder.Sql("exec _maintenance.ResetSequences;");
+            migrationBuilder.Sql("exec _.Temporal_EnableSystemTime;");
+            migrationBuilder.Sql("exec _.ResetIdentities;");
+            migrationBuilder.Sql("exec _.ResetSequences;");
 
             return migrationBuilder;
         }

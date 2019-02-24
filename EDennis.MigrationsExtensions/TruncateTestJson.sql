@@ -6,16 +6,16 @@ GO
 -- Author:		Dennis Mitchell
 -- Create date: 2018-08-15
 -- Description:	Purges all data in 
---              _maintenance.TestJson and its
+--              _.TestJson and its
 --              history table
 -- =============================================
-CREATE PROCEDURE [_maintenance].[TruncateTestJson] 
+CREATE PROCEDURE [_].[TruncateTestJson] 
 AS
 BEGIN
 
-	alter table _maintenance.TestJson set (system_versioning = off);
-	truncate table _maintenance.TestJson;
-	truncate table _maintenance.TestJsonHistory;
-	alter table _maintenance.TestJson set (system_versioning=on (history_table = _maintenance.TestJsonHistory));
+	alter table _.TestJson set (system_versioning = off);
+	truncate table _.TestJson;
+	truncate table _.TestJsonHistory;
+	alter table _.TestJson set (system_versioning=on (history_table = _.TestJsonHistory));
 
 END

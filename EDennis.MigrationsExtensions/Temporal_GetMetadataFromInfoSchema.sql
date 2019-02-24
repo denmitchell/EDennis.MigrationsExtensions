@@ -1,4 +1,4 @@
-/****** Object:  StoredProcedure [_maintenance].[Temporal_GetMetadataFromInfoSchema]    Script Date: 2/25/2018 4:33:46 PM ******/
+/****** Object:  StoredProcedure [_].[Temporal_GetMetadataFromInfoSchema]    Script Date: 2/25/2018 4:33:46 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +10,7 @@ GO
 -- Create date: 2018-02-24
 -- Description: Gets temporal metadata from the information_schema view 
 -- ===========================================================================
-CREATE PROCEDURE [_maintenance].[Temporal_GetMetadataFromInfoSchema]
+CREATE PROCEDURE [_].[Temporal_GetMetadataFromInfoSchema]
 AS
 BEGIN
 

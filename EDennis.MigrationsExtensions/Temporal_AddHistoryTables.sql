@@ -1,4 +1,4 @@
-﻿/****** Object:  StoredProcedure [_maintenance].[Temporal_AddHistoryTables]    Script Date: 2/27/2018 3:01:13 PM ******/
+﻿/****** Object:  StoredProcedure [_].[Temporal_AddHistoryTables]    Script Date: 2/27/2018 3:01:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +9,7 @@ GO
 -- Create date: 2018-02-24
 -- Description: Adds new history tables that are missing from schema
 -- ===========================================================================
-CREATE PROCEDURE [_maintenance].[Temporal_AddHistoryTables](
+CREATE PROCEDURE [_].[Temporal_AddHistoryTables](
        @AutoEnable BIT = 1
 )
 AS
@@ -39,8 +39,8 @@ BEGIN
                            SysEndColumnName varchar(255)
               );
       
-              insert into @tt exec _maintenance.Temporal_GetMetadataFromInfoSchema
-              insert into @tt exec _maintenance.Temporal_GetMetadataFromExtProp
+              insert into @tt exec _.Temporal_GetMetadataFromInfoSchema
+              insert into @tt exec _.Temporal_GetMetadataFromExtProp
  
               declare @th table(
                      TemporalTableSchema varchar(30),
@@ -240,7 +240,7 @@ BEGIN
 														exec ('create schema [' + @HistoryTableSchema + '];');
 													end
 													declare @tblsql varchar(max) = 
-														_maintenance.Temporal_GetBaseHistoryTableDefinition(
+														_.Temporal_GetBaseHistoryTableDefinition(
 															@TemporalTableSchema, @TemporalTableName, 
 															@HistoryTableSchema, @HistoryTableName)
 													exec (@tblsql)
@@ -305,6 +305,6 @@ BEGIN
               -- ENABLE SYSTEM TIME IF AUTO-ENABLED
               --
               if @AutoEnable = 1
-                     exec _maintenance.Temporal_EnableSystemTime
+                     exec _.Temporal_EnableSystemTime
  
 END

@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Added SaveMappings extension method, which saves Table&lt;-&gt;Class mappings and Column&lt;-&gt;Property mappings as extended properties in the SQL Server database.  Note: this method must come after all tables have been defined.</PackageReleaseNotes>
+    <PackageReleaseNotes>Breaking changes -- reworked code to have a single MigrationsExtensionsSqlGenerator, which accommodates SaveMappings and/or Sql Temporal Table support.  Reworked CreateMaintenanceProcedures to include optional parameters for SQL temporal tables and including specific procedures.  Replaced "_maintenance" with "_" as the maintenance schema name.  Added the ability to include helpful procedures/functions in the "_" schema.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>2.0.0.0</FileVersion>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <Copyright>Dennis Mitchell, 2018</Copyright>
+    <FileVersion>3.0.0.0</FileVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <Copyright>Dennis Mitchell, 2019</Copyright>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
 
@@ -18,12 +18,20 @@
     <None Remove="CreateMaintenanceSchema_Drop.sql" />
     <None Remove="CreateTestJsonTable.sql" />
     <None Remove="CreateTestJsonTable_Drop.sql" />
+    <None Remove="GetMappings.sql" />
+    <None Remove="GetMappings_Drop.sql" />
     <None Remove="GetTestJson.sql" />
     <None Remove="GetTestJson_Drop.sql" />
+    <None Remove="MaxDateTime2.sql" />
+    <None Remove="MaxDateTime2_Drop.sql" />
     <None Remove="ResetIdentities.sql" />
     <None Remove="ResetIdentities_Drop.sql" />
     <None Remove="ResetSequences.sql" />
     <None Remove="ResetSequences_Drop.sql" />
+    <None Remove="RightAfter.sql" />
+    <None Remove="RightAfter_Drop.sql" />
+    <None Remove="RightBefore.sql" />
+    <None Remove="RightBefore_Drop.sql" />
     <None Remove="SaveTestJson.sql" />
     <None Remove="SaveTestJson_Drop.sql" />
     <None Remove="Temporal_AddHistoryTables.sql" />
@@ -45,6 +53,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="GetMappings.sql" />
+    <EmbeddedResource Include="GetMappings_Drop.sql" />
+    <EmbeddedResource Include="RightAfter.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RightAfter_Drop.sql" />
+    <EmbeddedResource Include="RightBefore_Drop.sql" />
+    <EmbeddedResource Include="MaxDateTime2_Drop.sql" />
+    <EmbeddedResource Include="RightBefore.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaxDateTime2.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="ResetIdentities.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

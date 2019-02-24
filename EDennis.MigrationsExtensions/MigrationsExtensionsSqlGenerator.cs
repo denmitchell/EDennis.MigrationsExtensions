@@ -2,13 +2,14 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using System.IO;
 using System.Linq;
 
 namespace EDennis.MigrationsExtensions {
-    public class TemporalMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator {
+    public class MigrationsExtensionsSqlGenerator : SqlServerMigrationsSqlGenerator {
 
 
-        public TemporalMigrationsSqlGenerator(
+        public MigrationsExtensionsSqlGenerator(
             MigrationsSqlGeneratorDependencies dependencies, 
             IMigrationsAnnotationProvider migrationsAnnotations) 
             : base(dependencies, migrationsAnnotations) {
@@ -20,14 +21,10 @@ namespace EDennis.MigrationsExtensions {
 
             var sqlHelper = Dependencies.SqlGenerationHelper;
 
-
-            if (operation is CreateTableOperation op ) {                    
-                base.Generate(operation, model, builder);
-                if (op.Name == "__EFMigrationsHistory")
-                    return;
-                builder.Append("EXEC _maintenance.Temporal_AddHistoryTables");
+            if (operation is CreateSqlServerTemporalTablesOperation op ) {                    
+                builder.Append("EXEC _.Temporal_AddHistoryTables");
                 builder.AppendLine(sqlHelper.StatementTerminator);
-                builder.Append("EXEC _maintenance.Temporal_UpdateExtendedProperties");
+                builder.Append("EXEC _.Temporal_UpdateExtendedProperties");
                 builder.AppendLine(sqlHelper.StatementTerminator);
                 builder.EndCommand();
             } else if (operation is SaveMappingsOperation) {

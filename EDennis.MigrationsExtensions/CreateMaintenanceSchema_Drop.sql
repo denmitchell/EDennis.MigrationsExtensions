@@ -1,1 +1,1 @@
-﻿drop schema _maintenance;
+﻿drop schema _;
