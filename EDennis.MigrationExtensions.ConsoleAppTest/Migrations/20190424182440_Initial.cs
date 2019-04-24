@@ -10,6 +10,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         {
 
             migrationBuilder.CreateMaintenanceProcedures();
+            migrationBuilder.CreateTestJsonTableSupport();
 
             migrationBuilder.EnsureSchema(
                 name: "xxx");

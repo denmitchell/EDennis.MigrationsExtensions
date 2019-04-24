@@ -95,7 +95,7 @@ BEGIN
                                   and not exists(
                                          select 0
                                                 from @tt tt
-                                                where tt.TemporalTableSchema = @TemporalTableSchema
+                                                where tt.TemporalTableSchema = cStart.TABLE_SCHEMA
                                                        and tt.TemporalTableName = cStart.TABLE_NAME
                                   )
  
