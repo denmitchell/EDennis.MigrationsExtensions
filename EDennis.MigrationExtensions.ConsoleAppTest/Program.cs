@@ -13,6 +13,8 @@ namespace EDennis.MigrationsExtensions.ConsoleAppTest
             using (var context = new PersonAddressContext()) {
                 context.Database.Migrate();
             }
+            Console.ReadKey();
         }
+
     }
 }

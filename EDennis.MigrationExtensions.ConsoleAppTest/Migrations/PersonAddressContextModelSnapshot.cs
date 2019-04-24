@@ -15,7 +15,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("Relational:Sequence:.seqAddress", "'seqAddress', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("Relational:Sequence:.seqPerson", "'seqPerson', '', '1', '1', '', '', 'Int32', 'False'")
@@ -28,6 +28,8 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                     b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("next value for seqPerson");
+
+                    b.Property<int?>("PersonId1");
 
                     b.Property<string>("Street")
                         .HasMaxLength(90);
@@ -46,7 +48,9 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
                     b.HasKey("PersonId", "AddressId");
 
-                    b.ToTable("Address");
+                    b.HasIndex("PersonId1");
+
+                    b.ToTable("Address","addr");
                 });
 
             modelBuilder.Entity("CodeFirstPractice.Person", b =>
@@ -78,16 +82,14 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.ToTable("Person");
+                    b.ToTable("Person","pers");
                 });
 
             modelBuilder.Entity("CodeFirstPractice.Address", b =>
                 {
                     b.HasOne("CodeFirstPractice.Person", "Person")
                         .WithMany("Addresses")
-                        .HasForeignKey("PersonId")
-                        .HasConstraintName("FK_Address_Person")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("PersonId1");
                 });
 #pragma warning restore 612, 618
         }

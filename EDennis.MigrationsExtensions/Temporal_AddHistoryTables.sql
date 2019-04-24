@@ -80,8 +80,7 @@ BEGIN
                      inner join (
                            select c.TABLE_SCHEMA, c.TABLE_NAME, c.COLUMN_NAME
                                   from information_schema.COLUMNS c
-                                  where c.TABLE_SCHEMA = @TemporalTableSchema
-                                         and c.DATA_TYPE = 'datetime2'
+                                  where c.DATA_TYPE = 'datetime2'
                                          and c.COLUMN_DEFAULT = '(CONVERT([datetime2],''9999-12-31 23:59:59.9999999''))'
                                          and c.IS_NULLABLE = 'NO'
                      ) cEnd

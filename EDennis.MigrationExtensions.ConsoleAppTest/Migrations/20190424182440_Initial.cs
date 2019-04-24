@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
-using EDennis.MigrationsExtensions;
 using Microsoft.EntityFrameworkCore.Migrations;
+using EDennis.MigrationsExtensions;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
@@ -9,8 +8,14 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateMaintenanceProcedures();
-            migrationBuilder.CreateTestJsonTableSupport();
+
+            migrationBuilder.EnsureSchema(
+                name: "addr");
+
+            migrationBuilder.EnsureSchema(
+                name: "pers");
 
             migrationBuilder.CreateSequence<int>(
                 name: "seqAddress");
@@ -20,6 +25,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Person",
+                schema: "pers",
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
@@ -37,6 +43,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Address",
+                schema: "addr",
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false),
@@ -44,41 +51,47 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                     Street = table.Column<string>(maxLength: 90, nullable: true),
                     SysUserId = table.Column<int>(nullable: false, defaultValueSql: "((0))"),
                     SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
-                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
+                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))"),
+                    PersonId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Address", x => new { x.PersonId, x.AddressId });
                     table.ForeignKey(
-                        name: "FK_Address_Person",
-                        column: x => x.PersonId,
+                        name: "FK_Address_Person_PersonId1",
+                        column: x => x.PersonId1,
+                        principalSchema: "pers",
                         principalTable: "Person",
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateIndex(
+                name: "IX_Address_PersonId1",
+                schema: "addr",
+                table: "Address",
+                column: "PersonId1");
+
+            migrationBuilder.CreateSqlServerTemporalTables();
             migrationBuilder.SaveMappings();
-            migrationBuilder.Sql(File.ReadAllText("MigrationsInserts\\Initial_Insert.sql"));
 
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Address");
+                name: "Address",
+                schema: "addr");
 
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "Person",
+                schema: "pers");
 
             migrationBuilder.DropSequence(
                 name: "seqAddress");
 
             migrationBuilder.DropSequence(
                 name: "seqPerson");
-
-            migrationBuilder.DropMaintenanceProcedures();
-            migrationBuilder.DropTestJsonTableSupport();
-
         }
     }
 }

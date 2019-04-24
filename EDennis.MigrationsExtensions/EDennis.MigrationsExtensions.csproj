@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>3.0.0</Version>
+    <Version>3.1.1</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
     <PackageReleaseNotes>Breaking changes -- reworked code to have a single MigrationsExtensionsSqlGenerator, which accommodates SaveMappings and/or Sql Temporal Table support.  Reworked CreateMaintenanceProcedures to include optional parameters for SQL temporal tables and including specific procedures.  Replaced "_maintenance" with "_" as the maintenance schema name.  Added the ability to include helpful procedures/functions in the "_" schema.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>3.0.0.0</FileVersion>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.1.1.0</FileVersion>
+    <AssemblyVersion>3.1.1.0</AssemblyVersion>
     <Copyright>Dennis Mitchell, 2019</Copyright>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
