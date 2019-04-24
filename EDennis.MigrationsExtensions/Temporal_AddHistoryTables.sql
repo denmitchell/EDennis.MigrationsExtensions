@@ -73,7 +73,8 @@ BEGIN
       
        declare c_misshist cursor for
               select cStart.TABLE_SCHEMA TemporalTableSchema, cStart.TABLE_NAME TemporalTableName,
-                           cStart.COLUMN_NAME SysStartColumnName, cEnd.COLUMN_NAME SysEndColumnName
+                           cStart.COLUMN_NAME SysStartColumnName, cEnd.COLUMN_NAME SysEndColumnName,
+						   th.HistoryTableSchema, cStart.TABLE_NAME HistoryTableName 
                      from information_schema.COLUMNS cStart
                      left outer join @th th
                            on th.TemporalTableSchema = cStart.TABLE_SCHEMA
@@ -99,7 +100,7 @@ BEGIN
                                   )
  
               open c_misshist
-              fetch next from c_misshist into @TemporalTableSchema, @TemporalTableName, @SysStartColumnName, @SysEndColumnName
+              fetch next from c_misshist into @TemporalTableSchema, @TemporalTableName, @SysStartColumnName, @SysEndColumnName, @HistoryTableSchema, @HistoryTableName
               while @@fetch_status = 0
               begin
                      if @TemporalTableName is not null
@@ -295,7 +296,7 @@ BEGIN
  
  
                      end
-                     fetch next from c_misshist into @TemporalTableSchema, @TemporalTableName, @SysStartColumnName, @SysEndColumnName
+                     fetch next from c_misshist into @TemporalTableSchema, @TemporalTableName, @SysStartColumnName, @SysEndColumnName, @HistoryTableSchema, @HistoryTableName
               end
               close c_misshist
               deallocate c_misshist
