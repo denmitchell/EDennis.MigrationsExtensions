@@ -52,7 +52,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
                     b.HasIndex("PersonId1");
 
-                    b.ToTable("Address","addr");
+                    b.ToTable("Address","xxx");
                 });
 
             modelBuilder.Entity("CodeFirstPractice.Person", b =>
@@ -84,7 +84,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.ToTable("Person","pers");
+                    b.ToTable("Person","xxx");
                 });
 
             modelBuilder.Entity("CodeFirstPractice.Address", b =>

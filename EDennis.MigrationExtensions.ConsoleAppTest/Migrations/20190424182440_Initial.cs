@@ -12,10 +12,8 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
             migrationBuilder.CreateMaintenanceProcedures();
 
             migrationBuilder.EnsureSchema(
-                name: "addr");
+                name: "xxx");
 
-            migrationBuilder.EnsureSchema(
-                name: "pers");
 
             migrationBuilder.CreateSequence<int>(
                 name: "seqAddress");
@@ -25,7 +23,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Person",
-                schema: "pers",
+                schema: "xxx",
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
@@ -43,7 +41,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Address",
-                schema: "addr",
+                schema: "xxx",
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false),
@@ -60,7 +58,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                     table.ForeignKey(
                         name: "FK_Address_Person_PersonId1",
                         column: x => x.PersonId1,
-                        principalSchema: "pers",
+                        principalSchema: "xxx",
                         principalTable: "Person",
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
@@ -68,7 +66,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_PersonId1",
-                schema: "addr",
+                schema: "xxx",
                 table: "Address",
                 column: "PersonId1");
 
@@ -81,11 +79,11 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Address",
-                schema: "addr");
+                schema: "xxx");
 
             migrationBuilder.DropTable(
                 name: "Person",
-                schema: "pers");
+                schema: "xxx");
 
             migrationBuilder.DropSequence(
                 name: "seqAddress");

@@ -23,7 +23,7 @@ namespace CodeFirstPractice {
             modelBuilder.HasSequence<int>("seqAddress").StartsAt(1);
 
             modelBuilder.Entity<Person>()
-                .ToTable("Person","pers")
+                .ToTable("Person","xxx")
                 .HasKey(p => p.PersonId);
 
             modelBuilder.Entity<Person>().Property(p => p.PersonId).HasDefaultValueSql("next value for seqPerson");
@@ -36,7 +36,7 @@ namespace CodeFirstPractice {
 
 
             modelBuilder.Entity<Address>()
-                .ToTable("Address","addr")
+                .ToTable("Address","xxx")
                 .HasKey(a => new { a.PersonId, a.AddressId });
 
             modelBuilder.Entity<Address>()

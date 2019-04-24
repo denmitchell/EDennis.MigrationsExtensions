@@ -57,11 +57,11 @@ BEGIN
                            from @tt;
  
               insert into @th(TemporalTableSchema, HistoryTableSchema)
-                     select @TemporalTableSchema, @HistoryTableSchema
+                     select distinct @TemporalTableSchema, @HistoryTableSchema
                            where not exists (select 0 from @th where TemporalTableSchema ='dbo')
  
               insert into @th(TemporalTableSchema, HistoryTableSchema)
-                     select t.TABLE_SCHEMA, t.TABLE_SCHEMA + '_history'
+                     select distinct t.TABLE_SCHEMA, t.TABLE_SCHEMA + '_history'
                            from information_schema.tables t
                            where not exists (select 0 from @th where TemporalTableSchema = t.TABLE_SCHEMA)
  
