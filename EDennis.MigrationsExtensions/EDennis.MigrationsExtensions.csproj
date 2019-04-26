@@ -2,18 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>3.1.4</Version>
+    <Version>3.1.5</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Fixed another bug with AddHistoryTables stored procedure</PackageReleaseNotes>
+    <PackageReleaseNotes>Added CreateBaseGlobalTempTable stored procedure</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>3.1.4.0</FileVersion>
-    <AssemblyVersion>3.1.4.0</AssemblyVersion>
+    <FileVersion>3.1.5.0</FileVersion>
+    <AssemblyVersion>3.1.5.0</AssemblyVersion>
     <Copyright>Dennis Mitchell, 2019</Copyright>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CreateBaseGlobalTempTable.sql" />
+    <None Remove="CreateBaseGlobalTempTable_Drop.sql" />
     <None Remove="CreateMaintenanceSchema.sql" />
     <None Remove="CreateMaintenanceSchema_Drop.sql" />
     <None Remove="CreateTestJsonTable.sql" />
@@ -53,7 +55,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="CreateBaseGlobalTempTable.sql" />
     <EmbeddedResource Include="GetMappings.sql" />
+    <EmbeddedResource Include="CreateBaseGlobalTempTable_Drop.sql" />
     <EmbeddedResource Include="GetMappings_Drop.sql" />
     <EmbeddedResource Include="RightAfter.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
