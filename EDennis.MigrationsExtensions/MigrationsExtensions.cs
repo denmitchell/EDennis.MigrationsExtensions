@@ -117,7 +117,7 @@ namespace EDennis.MigrationsExtensions {
             migrationBuilder.Sql(GetEmbeddedResource("MaxDateTime2.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("RightBefore.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("RightAfter.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("CreateBaseGlobalTempTable.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("CloneAsGlobalTempTable.sql"));
             }
             else {
             foreach (var procedure in specificProceduresToInclude) {
@@ -163,7 +163,7 @@ namespace EDennis.MigrationsExtensions {
         migrationBuilder.Sql(GetEmbeddedResource("MaxDateTime2_Drop.sql"));
         migrationBuilder.Sql(GetEmbeddedResource("RightBefore_Drop.sql"));
         migrationBuilder.Sql(GetEmbeddedResource("RightAfter_Drop.sql"));
-        migrationBuilder.Sql(GetEmbeddedResource("CreateBaseGlobalTempTable_Drop.sql"));
+        migrationBuilder.Sql(GetEmbeddedResource("CloneAsGlobalTempTable_Drop.sql"));
 
             return migrationBuilder;
     }

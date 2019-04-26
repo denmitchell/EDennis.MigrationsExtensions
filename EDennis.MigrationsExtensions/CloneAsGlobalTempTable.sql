@@ -10,9 +10,11 @@ GO
 --              does not have any constraints or identity
 --              specifications.  The global temporary table
 --              has a prefix '##', but otherwise has the
---              same name as the source table
+--              same name as the source table.  The procedure
+--              also inserts all data from the source table
+--              into the global temp table.
 -- ===========================================================
-CREATE PROCEDURE [_].[CreateBaseGlobalTempTable](
+CREATE PROCEDURE [_].[CloneAsGlobalTempTable](
 	@SourceTableName varchar(255),
 	@SourceTableSchema varchar(255) = 'dbo'
 ) 
@@ -68,14 +70,15 @@ declare c_coldef cursor for
 				then ' NOT' 
 				else '' 
 			end + ' NULL' 
-		+ case 
-			when c.column_default is not null
-				then ' DEFAULT (' + c.column_default + ')'
-				else ''
-			end
+		--+ case 
+		--	when c.column_default is not null
+		--		then ' DEFAULT (' + c.column_default + ')'
+		--		else ''
+		--	end
 		+ ',' ColDef
 		from information_schema.columns c
 		where c.table_schema = @SourceTableSchema and c.table_name = @SourceTableName 
+		order by ordinal_position
 
 open c_coldef
 fetch next from c_coldef into @colDef
@@ -93,6 +96,9 @@ deallocate c_coldef
 set @sql =  @sql + ');'
 
 
+exec sp_executesql @sql
+
+set @sql = 'insert into ' + @tempTableName + ' select * from [' + @SourceTableSchema + '].[' + @SourceTableName + ']'
 exec sp_executesql @sql
 
 END
