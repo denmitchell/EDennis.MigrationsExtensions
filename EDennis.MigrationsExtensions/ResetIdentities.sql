@@ -19,6 +19,7 @@ declare @TableName varchar(255)
 declare @ColumnName varchar(255)
 declare @sql nvarchar(255)
 declare @max bigint
+declare @adjust bit
 
 declare crsr cursor for
 	select s.name SchemaName, t.name TableName, i.name ColumnName
@@ -38,7 +39,13 @@ while @@fetch_status = 0
 				exec sp_executesql @sql,
 					N'@max bigint OUTPUT',
 					@max OUTPUT;
-				set @sql = 	'dbcc checkident (' + char(39) + @SchemaName + '.' + @TableName + char(39) + ', reseed, ' + convert(varchar(20), isnull(@max,1)) + ')'
+
+				set @sql = N'select @adjust = case when last_value is not null then 1 else 0 end from sys.identity_columns WHERE object_id = object_id(' + char(39) + '[' + @SchemaName + '].[' + @TableName + ']' + char(39) + ') ;'
+				exec sp_executesql @sql,
+					N'@adjust bit OUTPUT',
+					@adjust OUTPUT;
+
+				set @sql = 	'dbcc checkident (' + char(39) + @SchemaName + '.' + @TableName + char(39) + ', reseed, ' + convert(varchar(20), isnull(@max,1) - isnull(@adjust,0)) + ')'
 				exec (@sql)
 			end
 		fetch next from crsr 
