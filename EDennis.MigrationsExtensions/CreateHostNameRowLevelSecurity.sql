@@ -17,7 +17,6 @@ AS
 BEGIN
  
 
-
 		declare @TableSchema varchar(55)
 		declare @TableName varchar(200)
 		declare @SecurityPolicyName varchar(255)
@@ -52,7 +51,7 @@ GO
 --              If the login user is sa, allow all operations
 -- ==========================================================
 
-CREATE OR ALTER FUNCTION [' + @SchemaName + '].HostNameSecurityPredicate(@HostName AS sysname)  
+CREATE OR ALTER FUNCTION [' + @SecuritySchema + '].HostNameSecurityPredicate(@HostName AS sysname)  
 	RETURNS TABLE  
 WITH SCHEMABINDING  
 AS  

@@ -4,6 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace EDennis.MigrationsExtensions {
-    public class CreateSqlServerRowLevelHostNameSecurityOperation : MigrationOperation {
+    public class CreateSqlServerRowLevelSecurityForHostNameOperation : MigrationOperation {
     }
 }

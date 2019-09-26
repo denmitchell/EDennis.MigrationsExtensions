@@ -17,6 +17,7 @@
     <None Remove="CloneAsGlobalTempTable.sql" />
     <None Remove="CloneAsGlobalTempTable_Drop.sql" />
     <None Remove="CreateHostNameRowLevelSecurity.sql" />
+    <None Remove="CreateHostNameRowLevelSecurity_DropProcedures.sql" />
     <None Remove="CreateMaintenanceSchema.sql" />
     <None Remove="CreateMaintenanceSchema_Drop.sql" />
     <None Remove="CreateTestJsonTable.sql" />
@@ -61,6 +62,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="CloneAsGlobalTempTable.sql" />
+    <EmbeddedResource Include="CreateHostNameRowLevelSecurity.sql" />
     <EmbeddedResource Include="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
     <EmbeddedResource Include="DynamicSql\DropHostNameSecurityPolicy.sql" />
     <EmbeddedResource Include="DynamicSql\HostNameSecurityPolicy.sql" />
@@ -68,6 +70,7 @@
     <EmbeddedResource Include="GetMappings.sql" />
     <EmbeddedResource Include="CloneAsGlobalTempTable_Drop.sql" />
     <EmbeddedResource Include="GetMappings_Drop.sql" />
+    <EmbeddedResource Include="CreateHostNameRowLevelSecurity_DropProcedures.sql" />
     <EmbeddedResource Include="RightAfter.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -86,7 +89,7 @@
     <EmbeddedResource Include="ResetIdentities_Drop.sql" />
     <EmbeddedResource Include="GetTestJson.sql" />
     <EmbeddedResource Include="GetTestJson_Drop.sql" />
-    <EmbeddedResource Include="CreateHostNameRowLevelSecurity.sql" />
+    <EmbeddedResource Include="CreateHostNameRowLevelSecurity_Drop.sql" />
     <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition.sql" />
     <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
     <EmbeddedResource Include="CreateTestJsonTable.sql" />
