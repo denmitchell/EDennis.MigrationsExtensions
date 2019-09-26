@@ -21,6 +21,9 @@
     <None Remove="CreateMaintenanceSchema_Drop.sql" />
     <None Remove="CreateTestJsonTable.sql" />
     <None Remove="CreateTestJsonTable_Drop.sql" />
+    <None Remove="DynamicSql\DropHostNameSecurityPolicy.sql" />
+    <None Remove="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
+    <None Remove="DynamicSql\HostNameSecurityPolicy.sql" />
     <None Remove="GetMappings.sql" />
     <None Remove="GetMappings_Drop.sql" />
     <None Remove="GetTestJson.sql" />
@@ -58,7 +61,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="CloneAsGlobalTempTable.sql" />
-    <EmbeddedResource Include="HostNameSecurityPredicate.sql" />
+    <EmbeddedResource Include="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
+    <EmbeddedResource Include="DynamicSql\DropHostNameSecurityPolicy.sql" />
+    <EmbeddedResource Include="DynamicSql\HostNameSecurityPolicy.sql" />
+    <EmbeddedResource Include="DynamicSql\HostNameSecurityPredicate.sql" />
     <EmbeddedResource Include="GetMappings.sql" />
     <EmbeddedResource Include="CloneAsGlobalTempTable_Drop.sql" />
     <EmbeddedResource Include="GetMappings_Drop.sql" />

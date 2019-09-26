@@ -1,4 +1,5 @@
-﻿SET ANSI_NULLS ON
+declare @SchemaName varchar(500) = '@SchemaName';
+declare @sql varchar(max) = 'SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -9,13 +10,15 @@ GO
 --              If the login user is sa, allow all operations
 -- ==========================================================
 
-CREATE OR ALTER FUNCTION _.HostNameSecurityPredicate(@HostName AS sysname)  
+CREATE OR ALTER FUNCTION [' + @SchemaName + '].HostNameSecurityPredicate(@HostName AS sysname)  
 	RETURNS TABLE  
 WITH SCHEMABINDING  
 AS  
 	RETURN SELECT 1 AS fn_HostNameSecurityPredicate
 		WHERE @HostName = HOST_NAME()
-		OR ORIGINAL_LOGIN() = 'sa';
+		OR ORIGINAL_LOGIN() = ''sa'';
 
 GO
 
+'
+PRINT @sql
