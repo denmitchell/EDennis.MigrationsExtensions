@@ -10,7 +10,7 @@
     <FileVersion>3.1.7.0</FileVersion>
     <AssemblyVersion>3.1.7.0</AssemblyVersion>
     <Copyright>Dennis Mitchell, 2019</Copyright>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
