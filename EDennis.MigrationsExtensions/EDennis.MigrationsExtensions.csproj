@@ -25,6 +25,7 @@
     <None Remove="DynamicSql\DropHostNameSecurityPolicy.sql" />
     <None Remove="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
     <None Remove="DynamicSql\HostNameSecurityPolicy.sql" />
+    <None Remove="GenerateAltKeyFunctions.sql" />
     <None Remove="GetMappings.sql" />
     <None Remove="GetMappings_Drop.sql" />
     <None Remove="GetTestJson.sql" />
@@ -62,6 +63,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="CloneAsGlobalTempTable.sql" />
+    <EmbeddedResource Include="GenerateAltKeyFunctions.sql" />
     <EmbeddedResource Include="CreateHostNameRowLevelSecurity.sql" />
     <EmbeddedResource Include="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
     <EmbeddedResource Include="DynamicSql\DropHostNameSecurityPolicy.sql" />

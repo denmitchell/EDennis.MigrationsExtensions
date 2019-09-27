@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CodeFirstPractice {
-    public class Person {
-        public int PersonId { get; set; }
+namespace EDennis.MigrationExtensions.ConsoleAppTest
+{
+    public class Person : BaseEntity {
         public string FirstName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public decimal Weight { get; set; }
 
-        public int SysUserId { get; set; }
-        public DateTime SysStart { get; set; }
-        public DateTime SysEnd { get; set; }
-
+        public Guid PersonId { get; set; }
         public List<Address> Addresses { get; set; }
     }
 }

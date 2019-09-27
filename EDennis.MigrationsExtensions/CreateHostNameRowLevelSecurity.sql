@@ -21,9 +21,7 @@ BEGIN
 		declare @TableName varchar(200)
 		declare @SecurityPolicyName varchar(255)
 		
-		declare @cnt int = 0;
 		declare @sql varchar(max)
-		declare @val varchar(255), @name varchar(255)
   
 
 		--

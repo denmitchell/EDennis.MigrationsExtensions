@@ -1,10 +1,9 @@
-﻿using CodeFirstPractice;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using System;
 
-namespace EDennis.MigrationsExtensions.ConsoleAppTest
+namespace EDennis.MigrationExtensions.ConsoleAppTest
 {
     class Program
     {
