@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
 using EDennis.MigrationsExtensions;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
@@ -8,13 +8,11 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
             migrationBuilder.CreateMaintenanceProcedures();
             migrationBuilder.CreateTestJsonTableSupport();
-
+            
             migrationBuilder.EnsureSchema(
                 name: "xxx");
-
 
             migrationBuilder.CreateSequence<int>(
                 name: "seqAddress");
@@ -27,17 +25,21 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 schema: "xxx",
                 columns: table => new
                 {
-                    PersonId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SysUser = table.Column<string>(nullable: true),
+                    SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
+                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))"),
+                    Filter = table.Column<string>(nullable: true, defaultValueSql: "HOST_NAME()"),
                     FirstName = table.Column<string>(maxLength: 20, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     Weight = table.Column<decimal>(type: "decimal(10,3)", nullable: false),
-                    SysUserId = table.Column<int>(nullable: false, defaultValueSql: "((0))"),
-                    SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
-                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
+                    PersonId = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.PersonId);
+                    table.PrimaryKey("PK_Person", x => x.Id);
+                    table.UniqueConstraint("AK_Person_PersonId", x => x.PersonId);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,20 +47,22 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 schema: "xxx",
                 columns: table => new
                 {
-                    PersonId = table.Column<int>(nullable: false),
-                    AddressId = table.Column<int>(nullable: false, defaultValueSql: "next value for seqPerson"),
-                    Street = table.Column<string>(maxLength: 90, nullable: true),
-                    SysUserId = table.Column<int>(nullable: false, defaultValueSql: "((0))"),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SysUser = table.Column<string>(nullable: true),
                     SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
                     SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))"),
-                    PersonId1 = table.Column<int>(nullable: true)
+                    Filter = table.Column<string>(nullable: true, defaultValueSql: "HOST_NAME()"),
+                    Street = table.Column<string>(maxLength: 90, nullable: true),
+                    PersonId = table.Column<Guid>(nullable: false),
+                    AddressId = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => new { x.PersonId, x.AddressId });
+                    table.PrimaryKey("PK_Address", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_Person_PersonId1",
-                        column: x => x.PersonId1,
+                        name: "FK_Address_Person",
+                        column: x => x.PersonId,
                         principalSchema: "xxx",
                         principalTable: "Person",
                         principalColumn: "PersonId",
@@ -66,10 +70,10 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_PersonId1",
+                name: "IX_Address_PersonId",
                 schema: "xxx",
                 table: "Address",
-                column: "PersonId1");
+                column: "PersonId");
 
             migrationBuilder.CreateSqlServerTemporalTables();
             migrationBuilder.SaveMappings();

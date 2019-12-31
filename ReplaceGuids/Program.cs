@@ -11,7 +11,7 @@ namespace ReplaceGuidsNs {
     class Program {
 
 
-        public static void Main(string[] args) {
+        public static void Main(string[] _) {
 
 
             string baseJson = File.ReadAllText("base.json");

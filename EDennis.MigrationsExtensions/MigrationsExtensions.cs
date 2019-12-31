@@ -264,8 +264,6 @@ namespace EDennis.MigrationsExtensions {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = $"EDennis.MigrationsExtensions.{fileName}";
 
-            var x = assembly.GetManifestResourceNames();
-
             using Stream stream = assembly.GetManifestResourceStream(resourceName);
             using StreamReader reader = new StreamReader(stream);
             string result = reader.ReadToEnd();

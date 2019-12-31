@@ -16,11 +16,8 @@
 $scriptPath = $MyInvocation.MyCommand.Path
 $folder = Split-Path $scriptPath
 
-Write-Host $file
-Write-Host $folder
 Push-Location $folder
 $filePath = Resolve-Path $file
-Write-Host $filePath
 $sql = [IO.File]::ReadAllText($filePath) 
 Pop-Location
 
