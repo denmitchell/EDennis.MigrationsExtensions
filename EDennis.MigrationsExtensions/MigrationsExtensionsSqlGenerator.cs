@@ -36,10 +36,10 @@ namespace EDennis.MigrationsExtensions {
                     var className = nn.Last();
                     nn.Remove(nn.Last());
                     var namespaceName = string.Join('.', nn);
-
-                    var mapping = entityType.Relational();
-                    var schema = mapping.Schema ?? "dbo";
-                    var tableName = mapping.TableName;
+                    
+                    //var mapping = entityType.Relational();
+                    var schema = entityType.GetSchema() ?? "dbo";
+                    var tableName = entityType.GetTableName();// mapping.TableName;
 
                     var sql = $"execute sp_addextendedproperty " +
                         $"@name = N'efcore:{namespaceName}', @value = N'{className}', " +
@@ -54,8 +54,8 @@ namespace EDennis.MigrationsExtensions {
                     foreach (var prop in entityType.GetProperties()) {
                         if (navProps.Contains(prop.Name))
                             continue;
-                        var colMapping = prop.Relational();
-                        var columnName = colMapping.ColumnName;
+                        //var colMapping = prop.Relational();
+                        var columnName = prop.GetColumnName();// colMapping.ColumnName;
 
                         var sqlCol = $"execute sp_addextendedproperty " +
                             $"@name = N'efcore:{namespaceName}', @value = N'{className}.{prop.Name}', " +

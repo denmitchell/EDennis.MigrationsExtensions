@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>3.1.7</Version>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>3.6.0</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
     <PackageReleaseNotes>Fixed subtle bug with ResetIdentities, which did not fully reset identities to 1 after a DELETE</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/2938333?s=400&amp;v=4</PackageIconUrl>
-    <FileVersion>3.1.7.0</FileVersion>
-    <AssemblyVersion>3.1.7.0</AssemblyVersion>
+    <FileVersion>3.6.0.0</FileVersion>
+    <AssemblyVersion>3.6.0.0</AssemblyVersion>
     <Copyright>Dennis Mitchell, 2019</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
   </PropertyGroup>
@@ -16,14 +16,21 @@
   <ItemGroup>
     <None Remove="CloneAsGlobalTempTable.sql" />
     <None Remove="CloneAsGlobalTempTable_Drop.sql" />
+    <None Remove="CreateHostNameRowLevelSecurity.sql" />
+    <None Remove="CreateHostNameRowLevelSecurity_DropProcedures.sql" />
     <None Remove="CreateMaintenanceSchema.sql" />
     <None Remove="CreateMaintenanceSchema_Drop.sql" />
     <None Remove="CreateTestJsonTable.sql" />
     <None Remove="CreateTestJsonTable_Drop.sql" />
+    <None Remove="DynamicSql\DropHostNameSecurityPolicy.sql" />
+    <None Remove="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
+    <None Remove="DynamicSql\HostNameSecurityPolicy.sql" />
+    <None Remove="GenerateAltKeyFunctions.sql" />
     <None Remove="GetMappings.sql" />
     <None Remove="GetMappings_Drop.sql" />
     <None Remove="GetTestJson.sql" />
     <None Remove="GetTestJson_Drop.sql" />
+    <None Remove="HostNameSecurityPredicate.sql" />
     <None Remove="MaxDateTime2.sql" />
     <None Remove="MaxDateTime2_Drop.sql" />
     <None Remove="ResetIdentities.sql" />
@@ -56,9 +63,16 @@
 
   <ItemGroup>
     <EmbeddedResource Include="CloneAsGlobalTempTable.sql" />
+    <EmbeddedResource Include="GenerateAltKeyFunctions.sql" />
+    <EmbeddedResource Include="CreateHostNameRowLevelSecurity.sql" />
+    <EmbeddedResource Include="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
+    <EmbeddedResource Include="DynamicSql\DropHostNameSecurityPolicy.sql" />
+    <EmbeddedResource Include="DynamicSql\HostNameSecurityPolicy.sql" />
+    <EmbeddedResource Include="DynamicSql\HostNameSecurityPredicate.sql" />
     <EmbeddedResource Include="GetMappings.sql" />
     <EmbeddedResource Include="CloneAsGlobalTempTable_Drop.sql" />
     <EmbeddedResource Include="GetMappings_Drop.sql" />
+    <EmbeddedResource Include="CreateHostNameRowLevelSecurity_DropProcedures.sql" />
     <EmbeddedResource Include="RightAfter.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -77,6 +91,7 @@
     <EmbeddedResource Include="ResetIdentities_Drop.sql" />
     <EmbeddedResource Include="GetTestJson.sql" />
     <EmbeddedResource Include="GetTestJson_Drop.sql" />
+    <EmbeddedResource Include="CreateHostNameRowLevelSecurity_Drop.sql" />
     <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition.sql" />
     <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
     <EmbeddedResource Include="CreateTestJsonTable.sql" />
@@ -109,8 +124,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
