@@ -1,6 +1,7 @@
 ﻿using System;
-using EDennis.MigrationsExtensions;
 using Microsoft.EntityFrameworkCore.Migrations;
+using EDennis.MigrationsExtensions;
+using System.IO;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
@@ -10,7 +11,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         {
             migrationBuilder.CreateMaintenanceProcedures();
             migrationBuilder.CreateTestJsonTableSupport();
-            
+
             migrationBuilder.EnsureSchema(
                 name: "xxx");
 
@@ -77,6 +78,8 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
             migrationBuilder.CreateSqlServerTemporalTables();
             migrationBuilder.SaveMappings();
+            migrationBuilder.Sql(File.ReadAllText("MigrationsSql\\PostUp\\01_InsertPersons.sql"));
+            migrationBuilder.Sql(File.ReadAllText("MigrationsSql\\PostUp\\02_InsertAddresses.sql"));
 
         }
 

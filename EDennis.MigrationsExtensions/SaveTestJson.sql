@@ -22,7 +22,7 @@ GO
 -- Modified on: 2018-08-06:
 --				Conforms to new TestJson model
 -- =============================================
-CREATE PROCEDURE [_].[SaveTestJson] 
+CREATE OR ALTER PROCEDURE [_].[SaveTestJson] 
 	@ProjectName varchar(100), @ClassName varchar(100), @MethodName varchar(100), 
 	@TestScenario varchar(100), @TestCase varchar(100), @TestFile varchar(100), 
 	@Json nvarchar(max)

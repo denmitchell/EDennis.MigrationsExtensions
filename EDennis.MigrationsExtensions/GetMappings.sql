@@ -11,7 +11,7 @@ GO
 --              See EDennis.MigrationsExtensions
 --                 SaveMappingsOperation
 -- ===========================================================
-CREATE PROCEDURE [_].[GetMappings] 
+CREATE OR ALTER PROCEDURE [_].[GetMappings] 
 AS
 BEGIN
 declare @PREFIX varchar(30) = 'efcore:'

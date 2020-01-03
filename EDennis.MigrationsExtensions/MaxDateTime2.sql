@@ -7,7 +7,7 @@ GO
 -- Create date: 2019-02-24
 -- Description: Returns the maximum value for datetime2
 -- ===========================================================================
-create function _.MaxDateTime2()
+create or alter function _.MaxDateTime2()
 returns datetime2
 as begin
 	return convert(datetime2,'9999-12-31T23:59:59.9999999')

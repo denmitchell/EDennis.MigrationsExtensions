@@ -28,7 +28,10 @@
     <None Update="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="MigrationsInserts\Initial_Insert.sql">
+    <None Update="MigrationsSql\PostUp\02_InsertAddresses.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MigrationsSql\PostUp\01_InsertPersons.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -14,7 +14,7 @@ GO
 --              also inserts all data from the source table
 --              into the global temp table.
 -- ===========================================================
-CREATE PROCEDURE [_].[CloneAsGlobalTempTable](
+CREATE OR ALTER PROCEDURE [_].[CloneAsGlobalTempTable](
 	@SourceTableName varchar(255),
 	@SourceTableSchema varchar(255) = 'dbo'
 ) 

@@ -9,7 +9,7 @@ GO
 -- Description:	Gets records from  
 --              _.TestJson
 -- =============================================
-CREATE PROCEDURE [_].[GetTestJson] 
+CREATE OR ALTER PROCEDURE [_].[GetTestJson] 
 	@ProjectName varchar(100), 
 	@ClassName varchar(100) = null, 
 	@MethodName varchar(100) = null, 

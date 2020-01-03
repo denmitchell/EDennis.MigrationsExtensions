@@ -7,7 +7,7 @@ GO
 -- Create date: 2019-02-24
 -- Description: Returns the datetime2 value that is immediately after @dt
 -- ===========================================================================
-create function _.RightAfter(@dt datetime2)
+create or alter function _.RightAfter(@dt datetime2)
 returns datetime2
 as begin
 	return dateadd(nanosecond,+100,@dt)

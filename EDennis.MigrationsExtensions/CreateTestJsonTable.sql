@@ -7,6 +7,7 @@ GO
 -- Create date: 2018-05-24
 -- Description:	Creates a TestJson table
 -- =============================================
+if not exists (select table_name from information_schema.tables where table_schema = '_' and table_name = 'TestJson')
 CREATE TABLE _.TestJson(
        ProjectName varchar(100),
        ClassName varchar(100),

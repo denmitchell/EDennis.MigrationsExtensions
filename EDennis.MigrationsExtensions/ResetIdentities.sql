@@ -10,7 +10,7 @@ GO
 -- Description: Resets all identity values based upon max value of the 
 --              underlying columns.
 -- ===========================================================================
-CREATE PROCEDURE [_].[ResetIdentities]
+CREATE OR ALTER PROCEDURE [_].[ResetIdentities]
 AS
 BEGIN
 

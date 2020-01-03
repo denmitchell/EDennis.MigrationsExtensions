@@ -9,7 +9,7 @@ GO
 --              _.TestJson and its
 --              history table
 -- =============================================
-CREATE PROCEDURE [_].[TruncateTestJson] 
+CREATE OR ALTER PROCEDURE [_].[TruncateTestJson] 
 AS
 BEGIN
 

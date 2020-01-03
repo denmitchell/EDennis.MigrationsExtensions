@@ -14,7 +14,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=PersonAddress01;Integrated Security=SSPI;")
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PersonAddress01;Trusted_Connection=True;MultipleActiveResultSets=true")
                 .ReplaceService<IMigrationsSqlGenerator, MigrationsExtensionsSqlGenerator>();
         }
 

@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace EDennis.MigrationsExtensions {
     public class MigrationsExtensionsSqlGenerator : SqlServerMigrationsSqlGenerator {
@@ -70,10 +72,26 @@ namespace EDennis.MigrationsExtensions {
                 }
                 builder.EndCommand();
             } else {
+                if (operation is CreateTableOperation) {
+                    var opT = operation as CreateTableOperation;
+                    System.Diagnostics.Debug.WriteLine($"Staging SQL for CREATE TABLE {opT.Name} ...");
+                }
+                if (operation is SqlOperation) {
+                    var opS = operation as SqlOperation;
+                    System.Diagnostics.Debug.WriteLine($"Staging SQL for {GetSqlSnippet(opS)}");
+                }
                 base.Generate(operation, model, builder);
             }
         }
 
+        static Regex sqlRegex = new Regex("^\\s*(CREATE|create|INSERT|insert|ALTER|alter|DELETE|delete|UPDATE|update)([A-Za-z0-9_ \\[\\]\\.])+",RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
+
+        static string GetSqlSnippet(SqlOperation op) {
+            if(sqlRegex.IsMatch(op.Sql)) 
+                return sqlRegex.Match(op.Sql).Value;
+            else
+                return op.Sql.Substring(0, Math.Min(op.Sql.Length, 500) - 1);
+        }
 
     }
 }
