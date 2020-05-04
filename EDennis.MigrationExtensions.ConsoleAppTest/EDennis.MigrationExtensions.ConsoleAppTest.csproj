@@ -13,9 +13,7 @@
   <ItemGroup>
      <!--Note that this is not a "normal" ProjectReference.
          It needs the additional 'OutputItemType' and 'ReferenceOutputAssmbly' attributes.--> 
-    <ProjectReference Include="..\EDennis.MigrationsExtensions\EDennis.MigrationsExtensions.csproj"
-                      OutputItemType="Analyzer"
-                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\EDennis.MigrationsExtensions\EDennis.MigrationsExtensions.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 

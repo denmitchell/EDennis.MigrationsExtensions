@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EDennis.MigrationExtensions.ConsoleAppTest": {
+      "commandName": "Project",
+      "commandLineArgs": "OutputDirectory=obj\\Debug\\netcoreapp3.1\\"
+    }
+  }
+}
