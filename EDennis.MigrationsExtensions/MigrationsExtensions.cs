@@ -62,14 +62,14 @@ namespace EDennis.MigrationsExtensions
         /// <returns></returns>
         public static MigrationBuilder CreateSqlServerTemporalTables(this MigrationBuilder migrationBuilder) {
 
-            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.CreateMaintenanceSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetBaseHistoryTableDefinition.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_AddHistoryTables.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromInfoSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromExtProp.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_UpdateExtendedProperties.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_DisableSystemTime.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_EnableSystemTime.sql"));
 
             migrationBuilder.Operations.Add(
                 new CreateSqlServerTemporalTablesOperation());
@@ -84,13 +84,13 @@ namespace EDennis.MigrationsExtensions
         /// <returns></returns>
         public static MigrationBuilder DropSqlServerTemporalTables(this MigrationBuilder migrationBuilder) {
 
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_AddHistoryTables_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_DisableSystemTime_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_EnableSystemTime_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_UpdateExtendedProperties_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromInfoSchema_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetMetadataFromExtProp_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Temporal_GetBaseHistoryTableDefinition_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_AddHistoryTables_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_DisableSystemTime_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_EnableSystemTime_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_UpdateExtendedProperties_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromInfoSchema_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromExtProp_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetBaseHistoryTableDefinition_Drop.sql"));
 
             return migrationBuilder;
         }
@@ -106,16 +106,16 @@ namespace EDennis.MigrationsExtensions
             this MigrationBuilder migrationBuilder,
             params Procedure[] specificProceduresToInclude) {
 
-            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.CreateMaintenanceSchema.sql"));
 
             if (specificProceduresToInclude.Length == 0) {
-                migrationBuilder.Sql(GetEmbeddedResource("ResetIdentities.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("ResetSequences.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("GetMappings.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("MaxDateTime2.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("RightBefore.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("RightAfter.sql"));
-                migrationBuilder.Sql(GetEmbeddedResource("CloneAsGlobalTempTable.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Sql.ResetIdentities.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Sql.ResetSequences.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Sql.GetMappings.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Sql.MaxDateTime2.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Sql.RightBefore.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Sql.RightAfter.sql"));
+                migrationBuilder.Sql(GetEmbeddedResource("Sql.CloneAsGlobalTempTable.sql"));
             } else {
                 foreach (var procedure in specificProceduresToInclude) {
                     migrationBuilder.Sql(GetEmbeddedResource(procedure.ToString() + ".sql"));
@@ -136,11 +136,11 @@ namespace EDennis.MigrationsExtensions
         public static MigrationBuilder CreateTestJsonTableSupport(
     this MigrationBuilder migrationBuilder) {
 
-            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("CreateTestJsonTable.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("SaveTestJson.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("GetTestJson.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("TruncateTestJson.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.CreateMaintenanceSchema.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.CreateTestJsonTable.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.SaveTestJson.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.GetTestJson.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.TruncateTestJson.sql"));
             return migrationBuilder;
         }
 
@@ -154,13 +154,13 @@ namespace EDennis.MigrationsExtensions
         public static MigrationBuilder DropMaintenanceProcedures(
             this MigrationBuilder migrationBuilder) {
 
-            migrationBuilder.Sql(GetEmbeddedResource("ResetSequences_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("ResetIdentities_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("GetMappings_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("MaxDateTime2_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("RightBefore_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("RightAfter_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("CloneAsGlobalTempTable_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.ResetSequences_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.ResetIdentities_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.GetMappings_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.MaxDateTime2_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.RightBefore_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.RightAfter_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.CloneAsGlobalTempTable_Drop.sql"));
 
             return migrationBuilder;
         }
@@ -175,11 +175,11 @@ namespace EDennis.MigrationsExtensions
         public static MigrationBuilder DropTestJsonTableSupport(
             this MigrationBuilder migrationBuilder) {
 
-            migrationBuilder.Sql(GetEmbeddedResource("CreateMaintenanceSchema_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("CreateTestJsonTable_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("SaveTestJson_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("GetTestJson_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("TruncateTestJson_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.CreateMaintenanceSchema_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.CreateTestJsonTable_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.SaveTestJson_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.GetTestJson_Drop.sql"));
+            migrationBuilder.Sql(GetEmbeddedResource("Sql.TruncateTestJson_Drop.sql"));
             return migrationBuilder;
         }
 

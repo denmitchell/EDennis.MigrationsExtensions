@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>preview</LangVersion>
     <Version>3.6.1</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
     <PackageReleaseNotes>Upgrade to .NET Core 3.1</PackageReleaseNotes>
@@ -19,6 +20,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
+  
+  
   <ItemGroup>
     <None Include="Package\icon.png" Pack="true" PackagePath="\" />
     <None Update="Package\icon.png">
@@ -69,61 +72,66 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="CloneAsGlobalTempTable.sql" />
-    <EmbeddedResource Include="GetMappings.sql" />
-    <EmbeddedResource Include="CloneAsGlobalTempTable_Drop.sql" />
-    <EmbeddedResource Include="GetMappings_Drop.sql" />
-    <EmbeddedResource Include="RightAfter.sql">
+    <EmbeddedResource Include="Sql\CloneAsGlobalTempTable.sql" />
+    <EmbeddedResource Include="Sql\GetMappings.sql" />
+    <EmbeddedResource Include="Sql\CloneAsGlobalTempTable_Drop.sql" />
+    <EmbeddedResource Include="Sql\GetMappings_Drop.sql" />
+    <EmbeddedResource Include="Sql\RightAfter.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="RightAfter_Drop.sql" />
-    <EmbeddedResource Include="RightBefore_Drop.sql" />
-    <EmbeddedResource Include="MaxDateTime2_Drop.sql" />
-    <EmbeddedResource Include="RightBefore.sql">
+    <EmbeddedResource Include="Sql\RightAfter_Drop.sql" />
+    <EmbeddedResource Include="Sql\RightBefore_Drop.sql" />
+    <EmbeddedResource Include="Sql\MaxDateTime2_Drop.sql" />
+    <EmbeddedResource Include="Sql\RightBefore.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="MaxDateTime2.sql">
+    <EmbeddedResource Include="Sql\MaxDateTime2.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="ResetIdentities.sql">
+    <EmbeddedResource Include="Sql\ResetIdentities.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="ResetIdentities_Drop.sql" />
-    <EmbeddedResource Include="GetTestJson.sql" />
-    <EmbeddedResource Include="GetTestJson_Drop.sql" />
-    <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition.sql" />
-    <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
-    <EmbeddedResource Include="CreateTestJsonTable.sql" />
-    <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition_Drop.sql" />
-    <EmbeddedResource Include="TruncateTestJson_Drop.sql" />
-    <EmbeddedResource Include="TruncateTestJson.sql" />
-    <EmbeddedResource Include="SaveTestJson.sql" />
-    <EmbeddedResource Include="Temporal_AddHistoryTables.sql" />
+    <EmbeddedResource Include="Sql\ResetIdentities_Drop.sql" />
+    <EmbeddedResource Include="Sql\GetTestJson.sql" />
+    <EmbeddedResource Include="Sql\GetTestJson_Drop.sql" />
+    <EmbeddedResource Include="Sql\Temporal_GetBaseHistoryTableDefinition.sql" />
+    <EmbeddedResource Include="Sql\CreateTestJsonTable_Drop.sql" />
+    <EmbeddedResource Include="Sql\CreateTestJsonTable.sql" />
+    <EmbeddedResource Include="Sql\Temporal_GetBaseHistoryTableDefinition_Drop.sql" />
+    <EmbeddedResource Include="Sql\TruncateTestJson_Drop.sql" />
+    <EmbeddedResource Include="Sql\TruncateTestJson.sql" />
+    <EmbeddedResource Include="Sql\SaveTestJson.sql" />
+    <EmbeddedResource Include="Sql\Temporal_AddHistoryTables.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ResetSequences.sql">
+    <EmbeddedResource Include="Sql\ResetSequences.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="ResetSequences_Drop.sql" />
-    <EmbeddedResource Include="SaveTestJson_Drop.sql" />
-    <EmbeddedResource Include="Temporal_AddHistoryTables_Drop.sql" />
-    <EmbeddedResource Include="CreateMaintenanceSchema.sql" />
-    <EmbeddedResource Include="CreateMaintenanceSchema_Drop.sql" />
-    <EmbeddedResource Include="Temporal_DisableSystemTime.sql" />
-    <EmbeddedResource Include="Temporal_DisableSystemTime_Drop.sql" />
-    <EmbeddedResource Include="Temporal_EnableSystemTime.sql" />
-    <EmbeddedResource Include="Temporal_EnableSystemTime_Drop.sql" />
-    <EmbeddedResource Include="Temporal_GetMetadataFromExtProp.sql" />
-    <EmbeddedResource Include="Temporal_GetMetadataFromExtProp_Drop.sql" />
-    <EmbeddedResource Include="Temporal_GetMetadataFromInfoSchema.sql" />
-    <EmbeddedResource Include="Temporal_GetMetadataFromInfoSchema_Drop.sql" />
-    <EmbeddedResource Include="Temporal_UpdateExtendedProperties.sql" />
-    <EmbeddedResource Include="Temporal_UpdateExtendedProperties_Drop.sql" />
+    <EmbeddedResource Include="Sql\ResetSequences_Drop.sql" />
+    <EmbeddedResource Include="Sql\SaveTestJson_Drop.sql" />
+    <EmbeddedResource Include="Sql\Temporal_AddHistoryTables_Drop.sql" />
+    <EmbeddedResource Include="Sql\CreateMaintenanceSchema.sql" />
+    <EmbeddedResource Include="Sql\CreateMaintenanceSchema_Drop.sql" />
+    <EmbeddedResource Include="Sql\Temporal_DisableSystemTime.sql" />
+    <EmbeddedResource Include="Sql\Temporal_DisableSystemTime_Drop.sql" />
+    <EmbeddedResource Include="Sql\Temporal_EnableSystemTime.sql" />
+    <EmbeddedResource Include="Sql\Temporal_EnableSystemTime_Drop.sql" />
+    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromExtProp.sql" />
+    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromExtProp_Drop.sql" />
+    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromInfoSchema.sql" />
+    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromInfoSchema_Drop.sql" />
+    <EmbeddedResource Include="Sql\Temporal_UpdateExtendedProperties.sql" />
+    <EmbeddedResource Include="Sql\Temporal_UpdateExtendedProperties_Drop.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.3.20181.2" />
+    <!--<PackageReference Include="Microsoft.CodeAnalysis" Version="3.6.0-3.final" />-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.3.20181.2" />  
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

@@ -34,10 +34,10 @@ namespace EDennis.MigrationsExtensions {
                 var entityTypes = model.GetEntityTypes();
 
                 foreach (var entityType in entityTypes) {
-                    var nn = entityType.Name.Split(".").ToList();
+                    var nn = entityType.Name.Split('.').ToList();
                     var className = nn.Last();
                     nn.Remove(nn.Last());
-                    var namespaceName = string.Join('.', nn);
+                    var namespaceName = string.Join(".", nn);
                     
                     //var mapping = entityType.Relational();
                     var schema = entityType.GetSchema() ?? "dbo";
