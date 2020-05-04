@@ -1,14 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Migrations;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
-namespace EDennis.MigrationsExtensions {
+namespace EDennis.MigrationsExtensions
+{
 
     /// <summary>
     /// These extensions to MigrationBuilder facilitate working with SQL Server 
@@ -127,35 +125,6 @@ namespace EDennis.MigrationsExtensions {
 
             return migrationBuilder;
         }
-
-
-        public static MigrationBuilder CreateSqlServerRowLevelSecurityForHostName(
-            this MigrationBuilder migrationBuilder,
-            string filterColumnName = "Filter",
-            string securitySchema = "_security") {
-
-            migrationBuilder.Sql(GetEmbeddedResource("CreateHostNameRowLevelSecurity.sql"));
-            migrationBuilder.Sql($"exec _.CreateHostNameRowLevelSecurity '{filterColumnName}', '{securitySchema}'");
-
-            migrationBuilder.Operations.Add(
-                new CreateSqlServerRowLevelSecurityForHostNameOperation());
-
-            return migrationBuilder;
-        }
-
-
-        public static MigrationBuilder DropSqlServerRowLevelSecurityForHostName(
-            this MigrationBuilder migrationBuilder,
-            string filterColumnName = "Filter",
-            string securitySchema = "_security") {
-
-            migrationBuilder.Sql(GetEmbeddedResource("CreateHostNameRowLevelSecurity_Drop.sql"));
-            migrationBuilder.Sql($"exec _.CreateHostNameRowLevelSecurity_Drop '{filterColumnName}', '{securitySchema}'");
-            migrationBuilder.Sql(GetEmbeddedResource("CreateHostNameRowLevelSecurity_DropProcedures.sql"));
-
-            return migrationBuilder;
-        }
-
 
 
         /// <summary>

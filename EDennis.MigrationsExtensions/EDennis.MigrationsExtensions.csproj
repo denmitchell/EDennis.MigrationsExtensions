@@ -29,16 +29,10 @@
   <ItemGroup>
     <None Remove="CloneAsGlobalTempTable.sql" />
     <None Remove="CloneAsGlobalTempTable_Drop.sql" />
-    <None Remove="CreateHostNameRowLevelSecurity.sql" />
-    <None Remove="CreateHostNameRowLevelSecurity_DropProcedures.sql" />
     <None Remove="CreateMaintenanceSchema.sql" />
     <None Remove="CreateMaintenanceSchema_Drop.sql" />
     <None Remove="CreateTestJsonTable.sql" />
     <None Remove="CreateTestJsonTable_Drop.sql" />
-    <None Remove="DynamicSql\DropHostNameSecurityPolicy.sql" />
-    <None Remove="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
-    <None Remove="DynamicSql\HostNameSecurityPolicy.sql" />
-    <None Remove="GenerateAltKeyFunctions.sql" />
     <None Remove="GetMappings.sql" />
     <None Remove="GetMappings_Drop.sql" />
     <None Remove="GetTestJson.sql" />
@@ -76,16 +70,9 @@
 
   <ItemGroup>
     <EmbeddedResource Include="CloneAsGlobalTempTable.sql" />
-    <EmbeddedResource Include="GenerateAltKeyFunctions.sql" />
-    <EmbeddedResource Include="CreateHostNameRowLevelSecurity.sql" />
-    <EmbeddedResource Include="DynamicSql\GrantSelectHostNameSecurityPredicate.sql" />
-    <EmbeddedResource Include="DynamicSql\DropHostNameSecurityPolicy.sql" />
-    <EmbeddedResource Include="DynamicSql\HostNameSecurityPolicy.sql" />
-    <EmbeddedResource Include="DynamicSql\HostNameSecurityPredicate.sql" />
     <EmbeddedResource Include="GetMappings.sql" />
     <EmbeddedResource Include="CloneAsGlobalTempTable_Drop.sql" />
     <EmbeddedResource Include="GetMappings_Drop.sql" />
-    <EmbeddedResource Include="CreateHostNameRowLevelSecurity_DropProcedures.sql" />
     <EmbeddedResource Include="RightAfter.sql">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -104,7 +91,6 @@
     <EmbeddedResource Include="ResetIdentities_Drop.sql" />
     <EmbeddedResource Include="GetTestJson.sql" />
     <EmbeddedResource Include="GetTestJson_Drop.sql" />
-    <EmbeddedResource Include="CreateHostNameRowLevelSecurity_Drop.sql" />
     <EmbeddedResource Include="Temporal_GetBaseHistoryTableDefinition.sql" />
     <EmbeddedResource Include="CreateTestJsonTable_Drop.sql" />
     <EmbeddedResource Include="CreateTestJsonTable.sql" />
@@ -137,8 +123,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.3.20181.2" />
   </ItemGroup>
 
 </Project>
