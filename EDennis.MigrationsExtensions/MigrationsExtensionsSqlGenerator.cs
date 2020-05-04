@@ -13,7 +13,7 @@ namespace EDennis.MigrationsExtensions {
 
         public MigrationsExtensionsSqlGenerator(
             MigrationsSqlGeneratorDependencies dependencies,
-            IRelationalAnnotationProvider migrationsAnnotations) 
+            IMigrationsAnnotationProvider migrationsAnnotations) 
             : base(dependencies, migrationsAnnotations) {
         }
 
