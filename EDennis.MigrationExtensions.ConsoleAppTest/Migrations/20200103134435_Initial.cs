@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using EDennis.MigrationsExtensions;
 using System.IO;
+using System.Diagnostics;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
@@ -80,7 +81,10 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
             migrationBuilder.SaveMappings();
             migrationBuilder.Sql(File.ReadAllText("MigrationsSql\\PostUp\\01_InsertPersons.sql"));
             migrationBuilder.Sql(File.ReadAllText("MigrationsSql\\PostUp\\02_InsertAddresses.sql"));
-
+            Debugger.Launch();
+            var model = this.TargetModel;
+            migrationBuilder.GenerateJsonConverters();
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

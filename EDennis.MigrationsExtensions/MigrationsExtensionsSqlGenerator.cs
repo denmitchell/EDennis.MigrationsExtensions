@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -22,8 +23,9 @@ namespace EDennis.MigrationsExtensions {
             IModel model, MigrationCommandListBuilder builder) {
 
             var sqlHelper = Dependencies.SqlGenerationHelper;
-
-            if (operation is CreateSqlServerTemporalTablesOperation op ) {                    
+            if (operation is GetModelOperation gmo) {
+                gmo.ModelCallback(model);
+            } else if (operation is CreateSqlServerTemporalTablesOperation op ) {                    
                 builder.Append("EXEC _.Temporal_AddHistoryTables");
                 builder.AppendLine(sqlHelper.StatementTerminator);
                 builder.Append("EXEC _.Temporal_UpdateExtendedProperties");

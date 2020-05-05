@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace EDennis.MigrationsExtensions
 {
@@ -237,6 +241,35 @@ namespace EDennis.MigrationsExtensions
             using StreamReader reader = new StreamReader(stream);
             string result = reader.ReadToEnd();
             return result;
+        }
+
+
+        public static MigrationBuilder GenerateJsonConverters(
+            this MigrationBuilder migrationBuilder){
+
+            migrationBuilder.Operations.Add(
+                new GetModelOperation { ModelCallback = GenerateJsonConvertersFromModel });
+
+            return migrationBuilder;
+        }
+
+        public static void GenerateJsonConvertersFromModel(IModel model)
+        {
+//            Debugger.Launch();
+            foreach (var entityType in model.GetEntityTypes())
+            {
+                var name = entityType.Name.Substring(entityType.Name.LastIndexOf(".") + 1);
+                var nmspace = entityType.Name.Substring(0,entityType.Name.LastIndexOf("."));
+                var code = $@"using System.Collections.Generic;
+namespace {nmspace} {{
+    public partial class {name}List : List<{name}> {{}}
+}}
+";
+                if (!Directory.Exists("Generated"))
+                    Directory.CreateDirectory("Generated");
+                File.Delete($"Generated/{name}List.cs");
+                File.WriteAllText($"Generated/{name}List.cs", code);
+            }
         }
 
     }
