@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <!-- NEEDED FOR DATABASE MIGRATIONS -->
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
