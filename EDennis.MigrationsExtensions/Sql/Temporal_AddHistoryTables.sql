@@ -6,18 +6,19 @@ GO
  
 -- ===========================================================================
 -- Author:      Dennis Mitchell
--- Create date: 2018-02-24
+-- Create date: 2020-06-22
 -- Description: Adds new history tables that are missing from schema
 -- ===========================================================================
 CREATE PROCEDURE [_].[Temporal_AddHistoryTables](
-       @AutoEnable BIT = 1
+       @AutoEnable BIT = 1,
+       @SysStartColumnName VARCHAR(200) = 'SysStart',
+       @SysEndColumnName VARCHAR(200) = 'SysEnd'
 )
 AS
 BEGIN
  
        declare @TemporalTableSchema varchar(255) = 'dbo'
        declare @HistoryTableSchema varchar(255) = 'dbo_history'
-       declare @SysStartColumnName varchar(255), @SysEndColumnName varchar(255)
        declare @TemporalTableName varchar(255), @HistoryTableName varchar(255)
        declare @cnt int = 0;
        declare @sql varchar(max)
@@ -82,16 +83,14 @@ BEGIN
                            select c.TABLE_SCHEMA, c.TABLE_NAME, c.COLUMN_NAME
                                   from information_schema.COLUMNS c
                                   where c.DATA_TYPE = 'datetime2'
-                                         and c.COLUMN_DEFAULT = '(CONVERT([datetime2],''9999-12-31 23:59:59.9999999''))'
-                                         and c.IS_NULLABLE = 'NO'
+                                         and c.COLUMN_NAME = @SysStartColumnName
                      ) cEnd
                            on cEnd.TABLE_SCHEMA = cStart.TABLE_SCHEMA
                                   and cEnd.TABLE_NAME = cStart.TABLE_NAME
  
                      where
                            cStart.DATA_TYPE = 'datetime2'
-                                  and cStart.COLUMN_DEFAULT = '(getdate())'
-                                  and cStart.IS_NULLABLE = 'NO'
+                                  and cStart.COLUMN_NAME = @SysEndColumnName
                                   and not exists(
                                          select 0
                                                 from @tt tt

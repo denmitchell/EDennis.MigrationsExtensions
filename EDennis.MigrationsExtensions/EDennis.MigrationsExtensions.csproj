@@ -3,20 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>preview</LangVersion>
-    <Version>3.6.1</Version>
+    <Version>3.7.1</Version>
+	<IsPackable>True</IsPackable>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Upgrade to .NET Core 3.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgrade to .NET Standard 2.0</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <FileVersion>3.6.1.0</FileVersion>
-    <AssemblyVersion>3.6.1.0</AssemblyVersion>
-    <Copyright>Dennis Mitchell, 2019</Copyright>
+    <FileVersion>3.7.1</FileVersion>
+    <AssemblyVersion>3.7.1</AssemblyVersion>
+    <Copyright>Dennis Mitchell, 2020</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
   </PropertyGroup>
-
-	<PropertyGroup>
-		<RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json ;$(RestoreAdditionalProjectSources)</RestoreAdditionalProjectSources>
-	</PropertyGroup>
 
 
 
@@ -24,6 +21,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>Entity Framework,Migrations</PackageTags>
   </PropertyGroup>
 
   
@@ -132,13 +130,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.6.0-3.final" PrivateAssets="all"/>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0" PrivateAssets="all">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.6.0-3.final" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />  
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />  
   </ItemGroup>
 
   <ItemGroup>

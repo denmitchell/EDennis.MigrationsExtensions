@@ -1,9 +1,11 @@
-﻿using System;
+﻿using EDennis.MigrationExtensions.ConsoleAppTest.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest
 {
+    [SystemVersioned]
     public class Person : BaseEntity {
         public string FirstName { get; set; }
         public DateTime DateOfBirth { get; set; }

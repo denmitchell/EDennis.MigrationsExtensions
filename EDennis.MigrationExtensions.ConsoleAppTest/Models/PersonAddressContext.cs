@@ -24,6 +24,9 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest
             modelBuilder.HasSequence<int>("seqAddress").StartsAt(1);
 
             modelBuilder.Entity<Person>(e => {
+
+                e.HasAnnotation("SystemVersioned", true);
+
                 e.ToTable("Person", "xxx")
                    .HasKey(p => p.Id);
 

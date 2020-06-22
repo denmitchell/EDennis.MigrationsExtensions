@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-using EDennis.MigrationsExtensions;
 using System.IO;
+using EDennis.MigrationsExtensions;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
@@ -11,6 +11,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
         {
             migrationBuilder.CreateMaintenanceProcedures();
             migrationBuilder.CreateTestJsonTableSupport();
+
 
             migrationBuilder.EnsureSchema(
                 name: "xxx");
