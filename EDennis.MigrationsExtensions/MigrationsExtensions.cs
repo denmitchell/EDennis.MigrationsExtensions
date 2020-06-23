@@ -26,75 +26,6 @@ namespace EDennis.MigrationsExtensions
         }
 
 
-        public static ModelBuilder DropForeignKeys(this ModelBuilder modelBuilder) {
-            var entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
-            for (int i = 0; i < entityTypes.Count(); i++) {
-                var entityType = entityTypes[i];
-                var foreignKeys = entityType.GetForeignKeys().ToList();
-                for (int j = 0; j < foreignKeys.Count(); j++) {
-                    var fk = foreignKeys[j];
-                    entityType.RemoveForeignKey(
-                        fk.Properties,
-                        fk.PrincipalKey,
-                        fk.PrincipalEntityType);
-                }
-            }
-            return modelBuilder;
-        }
-
-        public static EntityTypeBuilder DropForeignKeys<TEntity>(this EntityTypeBuilder<TEntity> entityTypeBuilder)
-            where TEntity : class {
-            var foreignKeys = entityTypeBuilder.Metadata.GetForeignKeys().ToList();
-            for (int j = 0; j < foreignKeys.Count(); j++) {
-                var fk = foreignKeys[j];
-                entityTypeBuilder.Metadata.RemoveForeignKey(
-                    fk.Properties,
-                    fk.PrincipalKey,
-                    fk.PrincipalEntityType);
-            }
-            return entityTypeBuilder;
-        }
-
-        /// <summary>
-        /// Creates SQL Server temporal tables and supporting maintenance objects
-        /// </summary>
-        /// <param name="migrationBuilder"></param>
-        /// <returns></returns>
-        public static MigrationBuilder CreateSqlServerTemporalTables(this MigrationBuilder migrationBuilder) {
-
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.CreateMaintenanceSchema.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetBaseHistoryTableDefinition.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_AddHistoryTables.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromInfoSchema.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromExtProp.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_UpdateExtendedProperties.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_DisableSystemTime.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_EnableSystemTime.sql"));
-
-            migrationBuilder.Operations.Add(
-                new CreateSqlServerTemporalTablesOperation());
-            return migrationBuilder;
-        }
-
-
-        /// <summary>
-        /// Creates SQL Server temporal tables and supporting maintenance objects
-        /// </summary>
-        /// <param name="migrationBuilder"></param>
-        /// <returns></returns>
-        public static MigrationBuilder DropSqlServerTemporalTables(this MigrationBuilder migrationBuilder) {
-
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_AddHistoryTables_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_DisableSystemTime_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_EnableSystemTime_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_UpdateExtendedProperties_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromInfoSchema_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetMetadataFromExtProp_Drop.sql"));
-            migrationBuilder.Sql(GetEmbeddedResource("Sql.Temporal_GetBaseHistoryTableDefinition_Drop.sql"));
-
-            return migrationBuilder;
-        }
-
 
         /// <summary>
         /// Creates all stored procedures used to maintain temporal tables.  This
@@ -180,45 +111,6 @@ namespace EDennis.MigrationsExtensions
             migrationBuilder.Sql(GetEmbeddedResource("Sql.SaveTestJson_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Sql.GetTestJson_Drop.sql"));
             migrationBuilder.Sql(GetEmbeddedResource("Sql.TruncateTestJson_Drop.sql"));
-            return migrationBuilder;
-        }
-
-
-        /// <summary>
-        /// Adds history tables.  This method is called by the TemporalMigrationSqlGenerator
-        /// </summary>
-        /// <param name="migrationBuilder">The MigrationBuilder to extend</param>
-        /// <returns>the MigrationBuilder (fluent API)</returns>
-        public static MigrationBuilder AddHistoryTables(
-            this MigrationBuilder migrationBuilder) {
-
-            migrationBuilder.Sql("exec _.Temporal_AddHistoryTables;");
-            migrationBuilder.Sql("exec _.Temporal_UpdateExtendedProperties;");
-
-            return migrationBuilder;
-        }
-
-
-        /// <summary>
-        /// Loads data from SQL Server a file containing semicolon-terminated INSERT statements
-        /// </summary>
-        /// <param name="migrationBuilder">The MigrationBuilder to extend</param>
-        /// <param name="sqlFilePath">File containing INSERT statements, each terminated by ";"</param>
-        /// <returns>the MigrationBuilder (fluent API)</returns>
-        public static MigrationBuilder DoTemporalInserts(
-            this MigrationBuilder migrationBuilder, string sqlFilePath) {
-
-            migrationBuilder.Sql("exec _.Temporal_UpdateExtendedProperties;");
-            migrationBuilder.Sql("exec _.Temporal_DisableSystemTime;");
-
-            //load INSERT file and add to migrationBuilder
-            string statements = File.ReadAllText(sqlFilePath);
-            migrationBuilder.Sql(statements);
-
-            migrationBuilder.Sql("exec _.Temporal_EnableSystemTime;");
-            migrationBuilder.Sql("exec _.ResetIdentities;");
-            migrationBuilder.Sql("exec _.ResetSequences;");
-
             return migrationBuilder;
         }
 

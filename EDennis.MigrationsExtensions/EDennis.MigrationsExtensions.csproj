@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <Version>3.8.0</Version>
+    <Version>3.9.0</Version>
     <Description>This package provides the ability to generate SQL Server temporal/history tables during Entity Framework Core migrations.</Description>
-    <PackageReleaseNotes>Upgrade to .NET Standard 2.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Overhauled and greatly simplified creation of temporal tables.  Now, you just have to include SysStart and SysEnd columns and add SystemVersioned annotation in DbContext ModelBuilder.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <FileVersion>3.8.0</FileVersion>
-    <AssemblyVersion>3.8.0</AssemblyVersion>
+    <FileVersion>3.9.0</FileVersion>
+    <AssemblyVersion>3.9.0</AssemblyVersion>
     <Copyright>Dennis Mitchell, 2020</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
   </PropertyGroup>
@@ -96,14 +96,11 @@
     <EmbeddedResource Include="Sql\ResetIdentities_Drop.sql" />
     <EmbeddedResource Include="Sql\GetTestJson.sql" />
     <EmbeddedResource Include="Sql\GetTestJson_Drop.sql" />
-    <EmbeddedResource Include="Sql\Temporal_GetBaseHistoryTableDefinition.sql" />
     <EmbeddedResource Include="Sql\CreateTestJsonTable_Drop.sql" />
     <EmbeddedResource Include="Sql\CreateTestJsonTable.sql" />
-    <EmbeddedResource Include="Sql\Temporal_GetBaseHistoryTableDefinition_Drop.sql" />
     <EmbeddedResource Include="Sql\TruncateTestJson_Drop.sql" />
     <EmbeddedResource Include="Sql\TruncateTestJson.sql" />
     <EmbeddedResource Include="Sql\SaveTestJson.sql" />
-    <EmbeddedResource Include="Sql\Temporal_AddHistoryTables.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -112,19 +109,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sql\ResetSequences_Drop.sql" />
     <EmbeddedResource Include="Sql\SaveTestJson_Drop.sql" />
-    <EmbeddedResource Include="Sql\Temporal_AddHistoryTables_Drop.sql" />
     <EmbeddedResource Include="Sql\CreateMaintenanceSchema.sql" />
     <EmbeddedResource Include="Sql\CreateMaintenanceSchema_Drop.sql" />
-    <EmbeddedResource Include="Sql\Temporal_DisableSystemTime.sql" />
-    <EmbeddedResource Include="Sql\Temporal_DisableSystemTime_Drop.sql" />
-    <EmbeddedResource Include="Sql\Temporal_EnableSystemTime.sql" />
-    <EmbeddedResource Include="Sql\Temporal_EnableSystemTime_Drop.sql" />
-    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromExtProp.sql" />
-    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromExtProp_Drop.sql" />
-    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromInfoSchema.sql" />
-    <EmbeddedResource Include="Sql\Temporal_GetMetadataFromInfoSchema_Drop.sql" />
-    <EmbeddedResource Include="Sql\Temporal_UpdateExtendedProperties.sql" />
-    <EmbeddedResource Include="Sql\Temporal_UpdateExtendedProperties_Drop.sql" />
   </ItemGroup>
 
   <ItemGroup>

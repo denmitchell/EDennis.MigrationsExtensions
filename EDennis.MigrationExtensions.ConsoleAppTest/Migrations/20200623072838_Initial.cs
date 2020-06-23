@@ -1,7 +1,7 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System.IO;
 using EDennis.MigrationsExtensions;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
@@ -9,9 +9,9 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateMaintenanceProcedures();
             migrationBuilder.CreateTestJsonTableSupport();
-
 
             migrationBuilder.EnsureSchema(
                 name: "xxx");
@@ -29,10 +29,10 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SysUser = table.Column<string>(nullable: true),
-                    SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
-                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))"),
-                    Filter = table.Column<string>(nullable: true, defaultValueSql: "HOST_NAME()"),
+                    SysUser = table.Column<string>(maxLength: 255, nullable: true),
+                    SysStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SysEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Filter = table.Column<string>(maxLength: 255, nullable: true, defaultValueSql: "HOST_NAME()"),
                     FirstName = table.Column<string>(maxLength: 20, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     Weight = table.Column<decimal>(type: "decimal(10,3)", nullable: false),
@@ -51,11 +51,11 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SysUser = table.Column<string>(nullable: true),
-                    SysStart = table.Column<DateTime>(nullable: false, defaultValueSql: "(getdate())"),
-                    SysEnd = table.Column<DateTime>(nullable: false, defaultValueSql: "(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))"),
-                    Filter = table.Column<string>(nullable: true, defaultValueSql: "HOST_NAME()"),
-                    Street = table.Column<string>(maxLength: 90, nullable: true),
+                    SysUser = table.Column<string>(maxLength: 255, nullable: true),
+                    SysStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SysEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Filter = table.Column<string>(maxLength: 255, nullable: true, defaultValueSql: "HOST_NAME()"),
+                    Street = table.Column<string>(maxLength: 150, nullable: true),
                     PersonId = table.Column<Guid>(nullable: false),
                     AddressId = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()")
                 },
@@ -77,7 +77,6 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                 table: "Address",
                 column: "PersonId");
 
-            migrationBuilder.CreateSqlServerTemporalTables();
             migrationBuilder.SaveMappings();
             migrationBuilder.Sql(File.ReadAllText("MigrationsSql\\PostUp\\01_InsertPersons.sql"));
             migrationBuilder.Sql(File.ReadAllText("MigrationsSql\\PostUp\\02_InsertAddresses.sql"));

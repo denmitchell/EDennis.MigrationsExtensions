@@ -1,12 +1,8 @@
 ﻿using EDennis.MigrationsExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace EDennis.MigrationExtensions.ConsoleAppTest
-{
+namespace EDennis.MigrationExtensions.ConsoleAppTest {
     public class PersonAddressContext : DbContext {
 
         public DbSet<Person> Persons { get; set; }
@@ -32,27 +28,21 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest
 
                 e.Property(p => p.PersonId)
                     .HasDefaultValueSql("newsequentialid()");
-                e.Property(p => p.FirstName)
-                    .HasMaxLength(20);
-                e.Property(p => p.DateOfBirth)
-                    .HasColumnType("date");
-                e.Property(p => p.Weight)
-                    .HasColumnType("decimal(10,3)");
                 e.Property(p => p.Filter)
                     .HasDefaultValueSql("HOST_NAME()");
 
                 e.Property(p => p.SysStart)
-                    .HasDefaultValueSql("(getdate())")
                     .ValueGeneratedOnAddOrUpdate();
                 e.Property(p => p.SysEnd)
-                    .HasDefaultValueSql("(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
                     .ValueGeneratedOnAddOrUpdate();
 
             });
 
 
 
-            modelBuilder.Entity<Address>(e => { 
+            modelBuilder.Entity<Address>(e => {
+                e.HasAnnotation("SystemVersioned", true);
+
                 e.ToTable("Address", "xxx")
                     .HasKey(a => a.Id);
 
@@ -65,16 +55,12 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest
 
                 e.Property(a => a.AddressId)
                     .HasDefaultValueSql("newsequentialid()");
-                e.Property(a => a.Street)
-                    .HasMaxLength(90);
                 e.Property(p => p.Filter)
                     .HasDefaultValueSql("HOST_NAME()");
 
                 e.Property(a => a.SysStart)
-                    .HasDefaultValueSql("(getdate())")
                     .ValueGeneratedOnAddOrUpdate();
                 e.Property(a => a.SysEnd)
-                    .HasDefaultValueSql("(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))")
                     .ValueGeneratedOnAddOrUpdate();
             });
 

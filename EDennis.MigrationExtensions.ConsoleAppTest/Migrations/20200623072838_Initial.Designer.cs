@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 {
     [DbContext(typeof(PersonAddressContext))]
-    [Migration("20200622200355_Initial")]
+    [Migration("20200623072838_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,34 +37,36 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
                     b.Property<string>("Filter")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValueSql("HOST_NAME()");
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValueSql("HOST_NAME()")
+                        .HasMaxLength(255);
 
                     b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(90)")
-                        .HasMaxLength(90);
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<DateTime>("SysEnd")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("SysStart")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SysUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
                     b.HasIndex("PersonId");
 
                     b.ToTable("Address","xxx");
+
+                    b.HasAnnotation("SystemVersioned", true);
                 });
 
             modelBuilder.Entity("EDennis.MigrationExtensions.ConsoleAppTest.Person", b =>
@@ -79,8 +81,9 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
                     b.Property<string>("Filter")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValueSql("HOST_NAME()");
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValueSql("HOST_NAME()")
+                        .HasMaxLength(255);
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(20)")
@@ -93,16 +96,15 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
 
                     b.Property<DateTime>("SysEnd")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(CONVERT(datetime2, '9999-12-31 23:59:59.9999999'))");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("SysStart")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SysUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(10,3)");
