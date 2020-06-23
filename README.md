@@ -1,5 +1,5 @@
 # EDennis.MigrationsExtensions
-This package provides extensions to Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder to support SQL Server Temporal tables and/or TestJson tables.  
+This package provides extensions to Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder to support SQL Server Temporal tables and/or TestJson tables.  _NOTE: to use any of these extensions, you need to replace the SqlServerMigrationsSqlGenerator service with the MigrationsExtensionsSqlGenerator from this library. see [Custom Migrations Operations](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/operations#using-migrationbuildersql)_.  
 
 When you add ```migrationBuilder.SaveMappings();``` to the end of the Initial Migration's Up() method, the migrationBuilder saves table<->class mappings and column<->property mappings as SQL Server extended properties.  These extended properties are useful when you need to determine class names and property names from the information schema.  The EDennis.DataScaffolder Win Forms app will use these extended properties, when they are available.
 
