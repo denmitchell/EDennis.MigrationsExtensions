@@ -33,7 +33,7 @@ namespace EDennis.MigrationsExtensions {
         protected override void Generate(MigrationOperation operation,
             IModel model, MigrationCommandListBuilder builder) {
 
-            Debugger.Launch();
+            //Debugger.Launch();
 
             if (operation is SaveMappingsOperation) {
                 BuildSaveMappingsOperation(model, builder);
