@@ -51,7 +51,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest {
                     .HasPrincipalKey(p => p.PersonId)
                     .HasForeignKey(a => a.PersonId)
                     .HasConstraintName("FK_Address_Person")
-                    .OnDelete(DeleteBehavior.ClientCascade);
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 e.Property(a => a.AddressId)
                     .HasDefaultValueSql("newsequentialid()");

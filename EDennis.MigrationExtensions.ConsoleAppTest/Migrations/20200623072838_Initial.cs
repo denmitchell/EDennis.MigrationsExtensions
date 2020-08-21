@@ -68,7 +68,7 @@ namespace EDennis.MigrationExtensions.ConsoleAppTest.Migrations
                         principalSchema: "xxx",
                         principalTable: "Person",
                         principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

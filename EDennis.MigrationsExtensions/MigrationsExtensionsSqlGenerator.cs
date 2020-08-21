@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
@@ -32,7 +33,7 @@ namespace EDennis.MigrationsExtensions {
         protected override void Generate(MigrationOperation operation,
             IModel model, MigrationCommandListBuilder builder) {
 
-            //Debugger.Launch();
+            Debugger.Launch();
 
             if (operation is SaveMappingsOperation) {
                 BuildSaveMappingsOperation(model, builder);
@@ -40,6 +41,8 @@ namespace EDennis.MigrationsExtensions {
                 BuildDropTableOperation(operation, model, builder);
             } else if (operation is CreateTableOperation) {
                 BuildCreateTableOperation(operation, model, builder);
+            } else if (operation is AddForeignKeyOperation) {
+                BuildCreateForeignKeyOperation(operation, model, builder);
             } else if (operation is SqlOperation) {
                 var opS = operation as SqlOperation;
                 Debug.WriteLine($"Staging SQL for {GetSqlSnippet(opS)}");
@@ -58,8 +61,40 @@ namespace EDennis.MigrationsExtensions {
                 return op.Sql.Substring(0, Math.Min(op.Sql.Length, 500) - 1);
         }
 
+        private bool IsSystemVersioned(IModel model, string tableName) {
+            bool systemVersioned = (bool)Convert.ChangeType(
+                model.GetEntityTypes()
+                .FirstOrDefault(e => e.GetTableName() == tableName)
+                ?.FindAnnotation("SystemVersioned")
+                ?.Value
+                ?? false, typeof(bool));
+            return systemVersioned;
+        }
+
 
         #region Builder Methods
+
+
+        private void BuildCreateForeignKeyOperation(MigrationOperation operation,
+            IModel model, MigrationCommandListBuilder builder) {
+
+            var opF = operation as AddForeignKeyOperation;
+            Debug.WriteLine($"Staging SQL for FOREIGN KEY {opF.Name} ...");
+
+            string referencingTable = opF.Table;
+
+            bool systemVersioned = IsSystemVersioned(model, referencingTable);
+
+            if (systemVersioned) {
+                if (opF.OnDelete == ReferentialAction.Cascade)
+                    opF.OnDelete = ReferentialAction.NoAction;
+                if (opF.OnUpdate == ReferentialAction.Cascade)
+                    opF.OnUpdate = ReferentialAction.Restrict;
+            }
+
+            base.Generate(opF, model, builder);
+        }
+
 
         private void BuildCreateTableOperation(MigrationOperation operation,
         IModel model, MigrationCommandListBuilder builder) {
@@ -67,22 +102,24 @@ namespace EDennis.MigrationsExtensions {
             var opT = operation as CreateTableOperation;
             Debug.WriteLine($"Staging SQL for CREATE TABLE {opT.Name} ...");
 
-            bool systemVersioned = (bool)Convert.ChangeType(
-                model.GetEntityTypes()
-                .FirstOrDefault(e => e.GetTableName() == opT.Name)
-                ?.FindAnnotation("SystemVersioned")
-                ?.Value
-                ?? false, typeof(bool));
+            bool systemVersioned = IsSystemVersioned(model, opT.Name);
 
             if (systemVersioned) {
 
+                foreach(var fk in opT.ForeignKeys) {
+                    if(fk.OnDelete == ReferentialAction.Cascade)
+                        fk.OnDelete = ReferentialAction.NoAction;
+                    if (fk.OnUpdate == ReferentialAction.Cascade)
+                        fk.OnUpdate = ReferentialAction.NoAction;
+                }
+
+
                 _internalGenerator = new SqlServerMigrationsSqlGenerator(_dependencies, _migrationsAnnotations);
-                var commands = _internalGenerator.Generate(new List<MigrationOperation> { operation }, model);
+                var commands = _internalGenerator.Generate(new List<MigrationOperation> { opT }, model);
                 var commandText = commands.FirstOrDefault().CommandText;
                 string[] commandLines = commandText.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
                 var sb = new StringBuilder();
-                var colDefs = new List<string>();
 
                 foreach (var line in commandLines) {
                     if (line.TrimStart().StartsWith("[SysStart] datetime2")) {
